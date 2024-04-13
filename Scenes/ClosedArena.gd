@@ -1,18 +1,22 @@
 extends Node2D
 
 func _ready():
-	fixTheWorld()
+	#splitTheWorld()
+	pass
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func splitTheWorld():
 	$ArenaL.position.x = -16
 	$ArenaR.position.x = 16+544
 	$Void.visible = true
-	$Void/Area2D/CollisionShape2D.disabled = false
+	$Void/Area2D.set_collision_layer_value(10,true)
 	
 	
 func fixTheWorld():
 	$ArenaL.position.x = 0
 	$ArenaR.position.x = 544
 	$Void.visible = false
-	$Void/Area2D/CollisionShape2D.disabled = true
+	$Void/Area2D.set_collision_layer_value(10,false)
+	
+	
