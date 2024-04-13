@@ -36,8 +36,9 @@ func _process(_delta):
 	var index = 0
 	for timer in active_timers:
 		if timer.time_left == 0:
-			timer.queue_free()
-			active_timers.remove_at(index)
+			if timer == null:
+				timer.queue_free()
+				active_timers.remove_at(index)
 		index += index
 func _physics_process(_delta):
 # Add the gravity.
