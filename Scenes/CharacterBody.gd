@@ -8,10 +8,11 @@ var max_health = default_max_health
 var current_health = default_max_health
 
 # Movement and Dodge Properties
+
 @export_range(0.0, 1.0) var default_friction = 0.5
 @export_range(0.0 , 1.0) var default_acceleration = 0.25
-@export var default_speed = 300
-@export var default_dodge_speed = 2000
+@export var default_speed = 150
+@export var default_dodge_speed = 900
 @export var default_dodge_duration = 0.05
 @export var default_dodge_cooldown = 1
 
@@ -19,6 +20,7 @@ var friction = default_friction
 var acceleration = default_acceleration
 var speed = default_speed
 var dodge_speed = default_dodge_speed
+
 var dodging = false
 var dodge_duration = default_dodge_duration
 var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
