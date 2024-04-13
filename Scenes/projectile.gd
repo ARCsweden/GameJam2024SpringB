@@ -10,7 +10,7 @@ func _ready():
 	
 func _physics_process(delta):
 	
-	if proj_vect.length() < 70:
+	if proj_vect.length() < 10:
 		pass
 	elif count % 100 == 0:
 		proj_vect = GlobalInfo.player.global_position - global_position
