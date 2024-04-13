@@ -1,24 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://86r3gwidpktu"]
+[gd_scene load_steps=11 format=3 uid="uid://86r3gwidpktu"]
 
-[ext_resource type="Texture2D" uid="uid://cxgurp54ahe15" path="res://Sprites/HealthBar.png" id="1_oqdyk"]
 [ext_resource type="Script" path="res://UI/Bar.gd" id="1_srknb"]
+[ext_resource type="Texture2D" uid="uid://fj5lnhm1bmia" path="res://Sprites/PlayerBar.png" id="2_3ykvg"]
 [ext_resource type="Script" path="res://UI/Test.gd" id="3_bo11d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mutpi"]
-atlas = ExtResource("1_oqdyk")
+atlas = ExtResource("2_3ykvg")
 region = Rect2(-1, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ppsoq"]
-atlas = ExtResource("1_oqdyk")
-region = Rect2(16, 9, 16, 32)
+atlas = ExtResource("2_3ykvg")
+region = Rect2(16, 11, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wuwdy"]
-atlas = ExtResource("1_oqdyk")
+atlas = ExtResource("2_3ykvg")
 region = Rect2(32, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_22ji1"]
-atlas = ExtResource("1_oqdyk")
-region = Rect2(48, 9, 16, 32)
+atlas = ExtResource("2_3ykvg")
+region = Rect2(48, 11, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua71q"]
+atlas = ExtResource("2_3ykvg")
+region = Rect2(97, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8vof"]
+atlas = ExtResource("2_3ykvg")
+region = Rect2(64, 11, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_danex"]
+atlas = ExtResource("2_3ykvg")
+region = Rect2(80, 11, 16, 32)
 
 [node name="Bars" type="Control"]
 layout_mode = 3
@@ -30,7 +42,6 @@ grow_vertical = 2
 
 [node name="Value" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-z_index = 1
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 48.0
@@ -38,39 +49,61 @@ value = 50.0
 fill_mode = 3
 texture_over = SubResource("AtlasTexture_mutpi")
 texture_progress = SubResource("AtlasTexture_ppsoq")
-texture_progress_offset = Vector2(0, 9)
+texture_progress_offset = Vector2(0, 11)
 script = ExtResource("1_srknb")
 
 [node name="Damage" type="TextureProgressBar" parent="Value"]
-z_index = -1
+show_behind_parent = true
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 48.0
-value = 50.0
+value = 90.0
 fill_mode = 3
 texture_under = SubResource("AtlasTexture_wuwdy")
 texture_progress = SubResource("AtlasTexture_22ji1")
-texture_progress_offset = Vector2(0, 9)
+texture_progress_offset = Vector2(0, 11)
 tint_under = Color(1, 1, 1, 0.392157)
 
 [node name="Timer" type="Timer" parent="Value"]
 one_shot = true
 
+[node name="Value2" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 50.0
+offset_right = 66.0
+offset_bottom = 48.0
+value = 50.0
+fill_mode = 3
+texture_over = SubResource("AtlasTexture_ua71q")
+texture_progress = SubResource("AtlasTexture_y8vof")
+texture_progress_offset = Vector2(0, 11)
+script = ExtResource("1_srknb")
+
+[node name="Damage" type="TextureProgressBar" parent="Value2"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 48.0
+value = 90.0
+fill_mode = 3
+texture_under = SubResource("AtlasTexture_wuwdy")
+texture_progress = SubResource("AtlasTexture_danex")
+texture_progress_offset = Vector2(0, 11)
+tint_under = Color(1, 1, 1, 0.392157)
+
+[node name="Timer" type="Timer" parent="Value2"]
+one_shot = true
+
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 7.0
-offset_top = 54.0
+offset_top = 110.0
 offset_right = 104.0
-offset_bottom = 70.0
+offset_bottom = 126.0
 script = ExtResource("3_bo11d")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 9.0
-offset_right = 48.0
-offset_bottom = 36.0
-
 [connection signal="timeout" from="Value/Timer" to="Value" method="_on_timer_timeout"]
+[connection signal="timeout" from="Value2/Timer" to="Value2" method="_on_timer_timeout"]
 [connection signal="changed" from="HSlider" to="HSlider" method="_on_changed"]
 [connection signal="value_changed" from="HSlider" to="HSlider" method="_on_value_changed"]
