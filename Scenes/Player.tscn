@@ -57,5 +57,5 @@ shape = SubResource("CapsuleShape2D_3k0qj")
 debug_color = Color(0.768627, 0.486275, 0, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(2, 2)
+zoom = Vector2(8, 8)
 position_smoothing_enabled = true

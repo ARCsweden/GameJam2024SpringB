@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 # Movement and Dodge Properties
-var speed = 300
-var dodge_speed = 2000
+var speed = 150
+var dodge_speed = 900
 var dodging = false
 var dodge_duration = 0.05
 var dodge_cooldown = 1  # Cooldown duration in seconds
