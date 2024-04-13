@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc8cbuu5tcd0a"]
+[gd_scene load_steps=10 format=3 uid="uid://1gqn25rqj46k"]
 
-[ext_resource type="Texture2D" uid="uid://dxoge4oyqlfd" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
+[ext_resource type="Texture2D" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
 [ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_asnnf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1h4g4"]

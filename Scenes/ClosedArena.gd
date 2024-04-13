@@ -1,8 +1,7 @@
 extends Node2D
 
 func _ready():
-	#splitTheWorld()
-	pass
+	GlobalInfo.arena = self
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
