@@ -1,40 +1,15 @@
-
-[gd_scene load_steps=12 format=3 uid="uid://djabf0tk6oft4"]
-
+[gd_scene load_steps=9 format=3 uid="uid://djabf0tk6oft4"]
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
-[ext_resource type="Texture2D" uid="uid://dmd6d6yqw4n30" path="res://Sprites/MrOne.png" id="2_a27we"]
 [ext_resource type="Texture2D" uid="uid://yxurhmuaf2c7" path="res://WeaponSprites/full swords.png" id="2_hq1mg"]
 [ext_resource type="Script" path="res://Scenes/Sword.gd" id="3_jgj58"]
-[ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
+[ext_resource type="PackedScene" uid="uid://chmx2nydj7ful" path="res://Scenes/debug.tscn" id="4_elmd3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kt68q"]
-atlas = ExtResource("2_a27we")
-region = Rect2(0, 0, 80, 95)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xhdlx"]
-atlas = ExtResource("2_a27we")
-region = Rect2(80, 0, 80, 95)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_aa384"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kt68q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xhdlx")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 2.0
-}]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahkjn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqvli"]
-radius = 12.0
-height = 110.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3k0qj"]
 radius = 5.83095
@@ -43,24 +18,19 @@ height = 33.9586
 [node name="Player" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-texture_filter = 1
 position = Vector2(144, 84)
 script = ExtResource("1_avkas")
 
-[node name="Animations" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 material = SubResource("CanvasItemMaterial_luhud")
-position = Vector2(5, -3)
-scale = Vector2(1, 1.238)
-sprite_frames = SubResource("SpriteFrames_aa384")
-animation = &"idle"
-script = ExtResource("3_rurco")
+position = Vector2(3.57628e-07, 1.84774e-06)
+scale = Vector2(20, 30)
+texture = SubResource("PlaceholderTexture2D_ahkjn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-8, 0)
 shape = SubResource("CapsuleShape2D_yqvli")
 
 [node name="Sword" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
 texture_filter = 3
 position = Vector2(14, -21)
 rotation = -0.785398
