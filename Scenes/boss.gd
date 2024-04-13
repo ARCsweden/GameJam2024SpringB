@@ -5,11 +5,10 @@ signal delete_me
 
 @onready var attack_timer = %AttackTimer
 @onready var dialogue = %Dialogue
-@onready var split_duration = %SplitDuration
 
 var active_timers = []
 
-
+var projectile = preload("res://Scenes/projectile.tscn")
 
 var current_x_direction
 var current_y_direction
@@ -24,6 +23,7 @@ var display_size
 var target
 
 func _ready():
+	GlobalInfo.boss = self
 	display_size = DisplayServer.window_get_size()
 	target = GlobalInfo.player
 	set_direction(axis.x, directions.POSITIVE)
@@ -42,8 +42,8 @@ func _process(_delta):
 func _physics_process(_delta):
 # Add the gravity.
 
-	velocity.x = move_speed * current_x_direction
-	velocity.y = move_speed * current_y_direction
+	#velocity.x = move_speed * current_x_direction
+	#velocity.y = move_speed * current_y_direction
 	
 	move_and_slide()
 	
@@ -57,7 +57,6 @@ func special_attack():
 	var	current_attack = attack_functions.pick_random()
 
 	current_attack.call(SPLIT)
-	split_duration.start()
 	debuff_duration_timer.connect("timeout", current_attack.bind(RESTORE))
 	debuff_duration_timer.start()
 	active_timers.append(debuff_duration_timer)
@@ -99,12 +98,14 @@ func choose_movement_action(action : String):
 			set_direction(axis.x, directions.NEGATIVE)
 	
 func _on_action_timer_timeout():
-	
 	choose_movement_action(movement.pick_random())
 
-
-func _on_split_duration_timeout():
-	emit_signal("delete_me")	
+func ranged_attack():
+	var active_projectile = projectile.instantiate()
+	add_child(active_projectile)
+	
+func _on_attack_timer_timeout():
+		ranged_attack()
 	
 func modify_fps(mode: int):
 	
@@ -150,8 +151,7 @@ func modify_resolution(mode: int):
 			
 			print("Splitting Resolution")
 		
-func _on_attack_timer_timeout():
-		special_attack()
+
 		
 func cleanup(trash : Resource):
 	trash.queue_free()
