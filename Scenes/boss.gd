@@ -125,7 +125,7 @@ func modify_player_speed(mode: int):
 			target.set_speed(target.speed / 2)
 			print("Splitting Speed")
 		RESTORE:
-			GlobalInfo.player.set_speed(target.original_speed)
+			GlobalInfo.player.set_speed(target.default_speed)
 			print("Restoring Speed")
 	
 func _on_attack_timer_timeout():

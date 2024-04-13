@@ -9,8 +9,6 @@ var current_health = default_max_health
 
 # Movement and Dodge Properties
 
-=======
-
 @export_range(0.0, 1.0) var default_friction = 0.5
 @export_range(0.0 , 1.0) var default_acceleration = 0.25
 @export var default_speed = 150
@@ -50,7 +48,6 @@ func _ready():
 
 func _process(_delta):
 	var local_velocity = Vector2.ZERO
-=======
 
 
 func _physics_process(delta):
