@@ -16,6 +16,8 @@ var current_health = default_max_health
 @export var default_dodge_duration = 0.2
 @export var default_dodge_cooldown = 1
 
+var default_zoom := 8
+
 var friction = default_friction
 var acceleration = default_acceleration
 var speed = default_speed
@@ -52,6 +54,8 @@ func _process(_delta):
 
 
 func _physics_process(delta):
+	
+	
 	if Input.is_action_just_pressed("attack"):
 		$Sword.swing()
 
@@ -67,7 +71,7 @@ func _physics_process(delta):
 		velocity = velocity.lerp(axis, friction)
 	else:
 		velocity = velocity.lerp(axis, acceleration)
-
+	
 	move_and_slide()
 
 # Function to start dodging
@@ -89,3 +93,6 @@ func _reset_dodge():
 	
 func set_speed(new_speed: int):
 	speed = new_speed
+	
+func set_zoom(new_zoom : Vector2):
+	$Camera2D.zoom = new_zoom

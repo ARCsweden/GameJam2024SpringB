@@ -14,17 +14,17 @@ var active_timers = []
 var current_x_direction
 var current_y_direction
 
-var attack_functions = [modify_fps, modify_player_speed]
-enum attacks {fps, speed}
+var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_resolution]
 enum {SPLIT, RESTORE}
 
 enum directions{POSITIVE = 1, NEGATIVE = -1, NEUTRAL = 0}
 enum axis{x,y}
 var movement = ["up", "down", "left", "right", "up_right", "up_left", "down_right", "down_left"]
-
+var display_size
 var target
 
 func _ready():
+	display_size = DisplayServer.window_get_size()
 	target = GlobalInfo.player
 	set_direction(axis.x, directions.POSITIVE)
 	set_direction(axis.y, directions.POSITIVE)
@@ -128,6 +128,28 @@ func modify_player_speed(mode: int):
 			GlobalInfo.player.set_speed(target.default_speed)
 			print("Restoring Speed")
 	
+func modify_zoom(mode: int):
+	match mode:
+		SPLIT:
+			target.set_zoom(Vector2(target.default_zoom / 2, target.default_zoom / 2))
+			print("Splitting Zoom")
+		RESTORE:
+			target.set_zoom(Vector2(target.default_zoom, target.default_zoom))
+			print("Restoring Zoom")
+			
+func modify_resolution(mode: int):
+	#DisplayServer.WINDOW_MODE_WINDOWED
+	match mode:
+		SPLIT:
+			DisplayServer.window_set_size(display_size / 2)
+			print("Splitting Resolution")
+		RESTORE:
+			
+			#DisplayServer.WINDOW_MODE_FULLSCREEN
+			DisplayServer.window_set_size(display_size)
+			
+			print("Splitting Resolution")
+		
 func _on_attack_timer_timeout():
 		special_attack()
 		
