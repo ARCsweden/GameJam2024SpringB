@@ -15,9 +15,20 @@ run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+
+[autoload]
+
+GlobalInfo="*res://global_info.gd"
+
 [display]
 
-window/stretch/scale=0.5
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+
+window/size/mode=3
+
 
 [input]
 
