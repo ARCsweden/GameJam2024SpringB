@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://2jsk3ccok47s"]
+
+[ext_resource type="Script" path="res://UI/Text.gd" id="1_noxye"]
+[ext_resource type="Script" path="res://UI/TestText.gd" id="2_4yufo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dv027"]
+bg_color = Color(0, 0, 0, 0.196078)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hnvu"]
+bg_color = Color(0.823529, 0, 0.160784, 1)
+
+[node name="Text" type="CanvasLayer"]
+
+[node name="BossDialog" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -516.0
+offset_top = -113.0
+offset_right = 513.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dv027")
+text = "hello"
+scroll_active = false
+scroll_following = true
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("1_noxye")
+
+[node name="TimerCharacter" type="Timer" parent="BossDialog"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Timeout" type="Timer" parent="BossDialog"]
+wait_time = 5.0
+one_shot = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 110.0
+offset_bottom = 113.0
+script = ExtResource("2_4yufo")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextEdit"]
+top_level = true
+layout_mode = 0
+offset_left = 13.0
+offset_top = 135.0
+offset_right = 145.0
+offset_bottom = 169.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5hnvu")
+text = "hello
+"
+fit_content = true
+shortcut_keys_enabled = false
+
+[connection signal="timeout" from="BossDialog/TimerCharacter" to="BossDialog" method="_on_timer_timeout"]
+[connection signal="timeout" from="BossDialog/Timeout" to="BossDialog" method="_on_timeout_timeout"]
+[connection signal="text_changed" from="TextEdit" to="TextEdit" method="_on_text_set"]

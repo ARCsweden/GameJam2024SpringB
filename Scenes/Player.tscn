@@ -1,10 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://skgu0onttq34"]
+
+[gd_scene load_steps=14 format=3 uid="uid://djabf0tk6oft4"]
+
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
-[ext_resource type="Texture2D" uid="uid://dmd6d6yqw4n30" path="res://Sprites/MrOne.png" id="2_a27we"]
+
+[ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
 [ext_resource type="Texture2D" uid="uid://yxurhmuaf2c7" path="res://WeaponSprites/full swords.png" id="2_hq1mg"]
 [ext_resource type="Script" path="res://Scenes/Sword.gd" id="3_jgj58"]
 [ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
+[ext_resource type="PackedScene" uid="uid://86r3gwidpktu" path="res://Scenes/Bars.tscn" id="4_x6wiy"]
+[ext_resource type="PackedScene" uid="uid://dmoi3di3robg4" path="res://Scenes/debug.tscn" id="6_ycbup"]
+[ext_resource type="PackedScene" uid="uid://chmx2nydj7ful" path="res://Scenes/debug.tscn" id="6_ycbup"]
+
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
 
@@ -55,6 +62,12 @@ sprite_frames = SubResource("SpriteFrames_aa384")
 animation = &"idle"
 script = ExtResource("3_rurco")
 
+[node name="Bars" parent="CharacterBody2D" instance=ExtResource("4_x6wiy")]
+offset_left = -41.0
+offset_top = -71.0
+offset_right = -41.0
+offset_bottom = -71.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-8, 0)
 shape = SubResource("CapsuleShape2D_yqvli")
@@ -90,3 +103,8 @@ debug_color = Color(0.768627, 0.486275, 0, 0.419608)
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 zoom = Vector2(8, 8)
 position_smoothing_enabled = true
+
+[node name="Debug" parent="CharacterBody2D" instance=ExtResource("6_ycbup")]
+layer = 20
+path_to_node = NodePath("..")
+properties = ["current_health", "velocity", "speed", "acceleration", "friction"]
