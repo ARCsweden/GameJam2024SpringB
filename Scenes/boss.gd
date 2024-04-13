@@ -12,8 +12,8 @@ var projectile = preload("res://Scenes/projectile.tscn")
 
 var current_x_direction
 var current_y_direction
-# modify_fps, modify_player_speed, modify_zoom, modify_resolution, 
-var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_resolution, modify_player_health, modify_map]
+# modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map, 
+var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map]
 enum {SPLIT, RESTORE}
 
 enum directions{POSITIVE = 1, NEGATIVE = -1, NEUTRAL = 0}
@@ -139,7 +139,7 @@ func modify_zoom(mode: int):
 			target.set_zoom(Vector2(target.default_zoom, target.default_zoom))
 			print("Restoring Zoom")
 			
-func modify_resolution(mode: int):
+func modify_window_size(mode: int):
 	var curr_size = DisplayServer.window_get_size()
 	match mode:
 		SPLIT:
@@ -165,6 +165,13 @@ func modify_player_health(mode: int):
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health / 2)
 		RESTORE:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health * 2)
+			
+func modify_resolution(mode: int):
+	match mode:
+		SPLIT:
+			pass
+		RESTORE:
+			pass
 func cleanup(trash : Resource):
 	trash.queue_free()
 
