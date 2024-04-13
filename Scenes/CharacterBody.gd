@@ -28,6 +28,9 @@ func _ready():
 func _process(delta):
 	var local_velocity = Vector2.ZERO
 
+	if Input.is_action_just_pressed("attack"):
+		$Sword.swing()
+
 	# Handle normal movement
 	if Input.is_action_pressed("ui_right"):
 		local_velocity.x += 1
