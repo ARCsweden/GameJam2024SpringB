@@ -3,31 +3,25 @@ extends CharacterBody2D
 signal delete_me
 @export var move_speed := 100
 
-class attack:
-	var attack_func_ref
-	var type = ""
-
 @onready var attack_timer = %AttackTimer
 @onready var dialogue = %Dialogue
 @onready var split_duration = %SplitDuration
 
 var active_timers = []
-var active_attacks = []
-var can_attack := true
 
-enum attacks{FPS}
+
+
 var current_x_direction
 var current_y_direction
 
 var attack_functions = [modify_fps, modify_player_speed]
+enum attacks {fps, speed}
+enum {SPLIT, RESTORE}
 
 enum directions{POSITIVE = 1, NEGATIVE = -1, NEUTRAL = 0}
 enum axis{x,y}
-enum {SPLIT, RESTORE}
-
 var movement = ["up", "down", "left", "right", "up_right", "up_left", "down_right", "down_left"]
-var last_attack
-# Called when the node enters the scene tree for the first time.
+
 var target
 
 func _ready():
@@ -60,27 +54,14 @@ func special_attack():
 	debuff_duration_timer.wait_time = 5
 	debuff_duration_timer.one_shot = true
 	
-	
-	var current_attack
+	var	current_attack = attack_functions.pick_random()
 
-	while true:
-		current_attack = attack_functions.pick_random()
-		var count = 0
-		for attack in active_attacks:
-			if current_attack == attack:
-				count += 1
-		if count == 0:
-			break
 	current_attack.call(SPLIT)
 	split_duration.start()
 	debuff_duration_timer.connect("timeout", current_attack.bind(RESTORE))
 	debuff_duration_timer.start()
 	active_timers.append(debuff_duration_timer)
 	
-	active_attacks.append(active_attacks)
-	
-	last_attack = current_attack
-
 func set_direction(temp :int, direction: int):
 	
 	match temp:
