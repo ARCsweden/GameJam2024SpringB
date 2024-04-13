@@ -23,6 +23,8 @@ func _set_dialog(new_text):
 
 func _on_timer_timeout():
 	boss_dialog.visible_characters = boss_dialog.visible_characters + 1
+	timeout.stop()
+	timer.stop()
 	
 	if boss_dialog.visible_characters < characters:
 		timer.start()
