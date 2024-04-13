@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://djabf0tk6oft4"]
+
+[ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
+[ext_resource type="Texture2D" uid="uid://yxurhmuaf2c7" path="res://WeaponSprites/full swords.png" id="2_hq1mg"]
+[ext_resource type="Script" path="res://Scenes/Sword.gd" id="3_jgj58"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahkjn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqvli"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3k0qj"]
+radius = 5.83095
+height = 33.9586
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(144, 84)
+script = ExtResource("1_avkas")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_luhud")
+position = Vector2(3.57628e-07, 1.84774e-06)
+scale = Vector2(20, 30)
+texture = SubResource("PlaceholderTexture2D_ahkjn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_yqvli")
+
+[node name="Sword" type="Sprite2D" parent="CharacterBody2D"]
+texture_filter = 3
+position = Vector2(14, -21)
+rotation = -0.785398
+scale = Vector2(2.2, 2.294)
+texture = ExtResource("2_hq1mg")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+region_enabled = true
+region_rect = Rect2(16.2318, 16.2757, 15.6383, 15.6383)
+script = ExtResource("3_jgj58")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/Sword"]
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D/Sword"]
+position = Vector2(-6.53374, 6.01147)
+rotation = -1.85218
+scale = Vector2(0.590047, 0.611377)
+skew = 0.0213434
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Sword/Area2D"]
+position = Vector2(7, 12)
+rotation = -0.539307
+shape = SubResource("CapsuleShape2D_3k0qj")
+debug_color = Color(0.768627, 0.486275, 0, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
