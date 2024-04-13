@@ -22,6 +22,11 @@ GlobalInfo="*res://global_info.gd"
 
 [display]
 
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+
 window/size/mode=3
 
 
