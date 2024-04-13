@@ -1,12 +1,11 @@
-
-[gd_scene load_steps=12 format=3 uid="uid://djabf0tk6oft4"]
-
+[gd_scene load_steps=13 format=3 uid="uid://djabf0tk6oft4"]
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
-[ext_resource type="Texture2D" uid="uid://dmd6d6yqw4n30" path="res://Sprites/MrOne.png" id="2_a27we"]
+[ext_resource type="Texture2D" uid="uid://x6r3wm75hfh5" path="res://Sprites/MrOne.png" id="2_a27we"]
 [ext_resource type="Texture2D" uid="uid://yxurhmuaf2c7" path="res://WeaponSprites/full swords.png" id="2_hq1mg"]
 [ext_resource type="Script" path="res://Scenes/Sword.gd" id="3_jgj58"]
 [ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
+[ext_resource type="PackedScene" uid="uid://2jsk3ccok47s" path="res://Scenes/Text.tscn" id="6_nergw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
 
@@ -40,14 +39,12 @@ height = 110.0
 radius = 5.83095
 height = 33.9586
 
-[node name="Player" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 texture_filter = 1
 position = Vector2(144, 84)
 script = ExtResource("1_avkas")
 
-[node name="Animations" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="Animations" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_luhud")
 position = Vector2(5, -3)
 scale = Vector2(1, 1.238)
@@ -55,11 +52,11 @@ sprite_frames = SubResource("SpriteFrames_aa384")
 animation = &"idle"
 script = ExtResource("3_rurco")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-8, 0)
 shape = SubResource("CapsuleShape2D_yqvli")
 
-[node name="Sword" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sword" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 3
 position = Vector2(14, -21)
@@ -71,9 +68,9 @@ region_enabled = true
 region_rect = Rect2(16.2318, 16.2757, 15.6383, 15.6383)
 script = ExtResource("3_jgj58")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/Sword"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sword"]
 
-[node name="Area2D" type="Area2D" parent="CharacterBody2D/Sword"]
+[node name="Area2D" type="Area2D" parent="Sword"]
 position = Vector2(-6.53374, 6.01147)
 rotation = -1.85218
 scale = Vector2(0.590047, 0.611377)
@@ -81,12 +78,14 @@ skew = 0.0213434
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Sword/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Area2D"]
 position = Vector2(7, 12)
 rotation = -0.539307
 shape = SubResource("CapsuleShape2D_3k0qj")
 debug_color = Color(0.768627, 0.486275, 0, 0.419608)
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(8, 8)
 position_smoothing_enabled = true
+
+[node name="Text" parent="Camera2D" instance=ExtResource("6_nergw")]
