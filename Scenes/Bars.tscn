@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://86r3gwidpktu"]
+
+[ext_resource type="Texture2D" uid="uid://cxgurp54ahe15" path="res://Sprites/HealthBar.png" id="1_oqdyk"]
+[ext_resource type="Script" path="res://UI/Bar.gd" id="1_srknb"]
+[ext_resource type="Script" path="res://UI/Test.gd" id="3_bo11d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mutpi"]
+atlas = ExtResource("1_oqdyk")
+region = Rect2(-1, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppsoq"]
+atlas = ExtResource("1_oqdyk")
+region = Rect2(16, 9, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuwdy"]
+atlas = ExtResource("1_oqdyk")
+region = Rect2(32, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22ji1"]
+atlas = ExtResource("1_oqdyk")
+region = Rect2(48, 9, 16, 32)
+
+[node name="Bars" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Value" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 48.0
+value = 50.0
+fill_mode = 3
+texture_over = SubResource("AtlasTexture_mutpi")
+texture_progress = SubResource("AtlasTexture_ppsoq")
+texture_progress_offset = Vector2(0, 9)
+script = ExtResource("1_srknb")
+
+[node name="Damage" type="TextureProgressBar" parent="Value"]
+z_index = -1
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 48.0
+value = 50.0
+fill_mode = 3
+texture_under = SubResource("AtlasTexture_wuwdy")
+texture_progress = SubResource("AtlasTexture_22ji1")
+texture_progress_offset = Vector2(0, 9)
+tint_under = Color(1, 1, 1, 0.392157)
+
+[node name="Timer" type="Timer" parent="Value"]
+one_shot = true
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 54.0
+offset_right = 104.0
+offset_bottom = 70.0
+script = ExtResource("3_bo11d")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 9.0
+offset_right = 48.0
+offset_bottom = 36.0
+
+[connection signal="timeout" from="Value/Timer" to="Value" method="_on_timer_timeout"]
+[connection signal="changed" from="HSlider" to="HSlider" method="_on_changed"]
+[connection signal="value_changed" from="HSlider" to="HSlider" method="_on_value_changed"]

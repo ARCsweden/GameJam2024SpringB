@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://bc1sjffrk83dv"]
+[gd_scene load_steps=3 format=3 uid="uid://bc1sjffrk83dv"]
+
+[sub_resource type="Gradient" id="Gradient_vugcm"]
+offsets = PackedFloat32Array(0, 0.987952)
+colors = PackedColorArray(0, 0, 0, 1, 0.903614, 0.903614, 0.903614, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5uerk"]
+gradient = SubResource("Gradient_vugcm")
 
 [node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(17, -12)
+scale = Vector2(8.33594, 1228)
+texture = SubResource("GradientTexture1D_5uerk")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(3, -1)
+color = Color(1, 0.501961, 0, 1)
+polygon = PackedVector2Array(-42, -1, 0, -38, 42, 0, 0, 34, -41, 36)
+
+[node name="Camera2D" type="Camera2D" parent="Polygon2D"]
