@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Scenes/debug.gd" id="1_afv6h"]
 
 [sub_resource type="SystemFont" id="SystemFont_hv7dr"]
+subpixel_positioning = 0
+msdf_size = 32
 
 [node name="Debug" type="CanvasLayer"]
 script = ExtResource("1_afv6h")
@@ -22,5 +24,5 @@ offset_top = 14.0
 offset_right = 1144.0
 offset_bottom = 635.0
 theme_override_fonts/font = SubResource("SystemFont_hv7dr")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 16
 autowrap_mode = 3
