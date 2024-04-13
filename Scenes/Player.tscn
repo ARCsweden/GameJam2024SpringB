@@ -1,12 +1,15 @@
 [gd_scene load_steps=14 format=3 uid="uid://djabf0tk6oft4"]
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
+
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
 [ext_resource type="Texture2D" uid="uid://yxurhmuaf2c7" path="res://WeaponSprites/full swords.png" id="2_hq1mg"]
 [ext_resource type="Script" path="res://Scenes/Sword.gd" id="3_jgj58"]
 [ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
 [ext_resource type="PackedScene" uid="uid://86r3gwidpktu" path="res://Scenes/Bars.tscn" id="4_x6wiy"]
 [ext_resource type="PackedScene" uid="uid://dmoi3di3robg4" path="res://Scenes/debug.tscn" id="6_ycbup"]
+[ext_resource type="PackedScene" uid="uid://chmx2nydj7ful" path="res://Scenes/debug.tscn" id="6_ycbup"]
+
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
 

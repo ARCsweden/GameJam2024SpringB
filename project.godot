@@ -19,10 +19,6 @@ config/icon="res://icon.svg"
 
 GlobalInfo="*res://global_info.gd"
 
-[display]
-
-window/stretch/scale=0.93
-
 [input]
 
 dodge={
