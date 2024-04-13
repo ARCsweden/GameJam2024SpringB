@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://chmx2nydj7ful"]
+
+[ext_resource type="Script" path="res://Scenes/debug.gd" id="1_afv6h"]
+
+[sub_resource type="SystemFont" id="SystemFont_hv7dr"]
+
+[node name="Debug" type="CanvasLayer"]
+script = ExtResource("1_afv6h")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="stats" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 1144.0
+offset_bottom = 635.0
+theme_override_fonts/font = SubResource("SystemFont_hv7dr")
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 3

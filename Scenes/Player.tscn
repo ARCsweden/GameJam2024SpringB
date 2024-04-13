@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://djabf0tk6oft4"]
+[gd_scene load_steps=9 format=3 uid="uid://djabf0tk6oft4"]
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://yxurhmuaf2c7" path="res://WeaponSprites/full swords.png" id="2_hq1mg"]
 [ext_resource type="Script" path="res://Scenes/Sword.gd" id="3_jgj58"]
+[ext_resource type="PackedScene" uid="uid://chmx2nydj7ful" path="res://Scenes/debug.tscn" id="4_elmd3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
 
@@ -59,3 +60,7 @@ debug_color = Color(0.768627, 0.486275, 0, 0.419608)
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 zoom = Vector2(8, 8)
 position_smoothing_enabled = true
+
+[node name="Debug" parent="CharacterBody2D" instance=ExtResource("4_elmd3")]
+path_to_node = NodePath("..")
+properties = ["current_health", "velocity", "speed", "dodge_speed", "acceleration", "friction"]

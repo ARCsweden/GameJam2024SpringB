@@ -36,7 +36,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var index = 0
-	print(get_child_count())
+	#print(get_child_count())
 	for timer in active_attacks:
 		if timer.time_left == 0:
 			timer.queue_free()

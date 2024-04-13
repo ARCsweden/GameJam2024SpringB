@@ -2,29 +2,29 @@ extends CharacterBody2D
 
 signal hit;
 
+
 # Health
 @export var default_max_health = 1000
 var max_health = default_max_health
-var current_health = default_max_health
+@export var current_health = default_max_health
 
 # Movement and Dodge Properties
-
-@export_range(0.0, 1.0) var default_friction = 0.5
-@export_range(0.0 , 1.0) var default_acceleration = 0.25
+@export_range(0.0, 1.0) var default_friction = 0.1
+@export_range(0.0 , 1.0) var default_acceleration = 0.1
 @export var default_speed = 150
 @export var default_dodge_speed = 900
 @export var default_dodge_duration = 0.05
 @export var default_dodge_cooldown = 1
 
-var friction = default_friction
-var acceleration = default_acceleration
-var speed = default_speed
+@export var friction = default_friction
+@export var acceleration = default_acceleration
+@export var speed = default_speed
 var dodge_speed = default_dodge_speed
 
-var dodging = false
+@export var dodging = false
 var dodge_duration = default_dodge_duration
 var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
-var can_dodge = true      # Flag to check if dodge can be triggered
+@export var can_dodge = true      # Flag to check if dodge can be triggered
 var axis = Vector2.ZERO
 
 func _ready():
@@ -43,6 +43,9 @@ func _ready():
 	cooldown_timer.one_shot = true
 	add_child(cooldown_timer)
 	cooldown_timer.timeout.connect(_reset_dodge)
+	
+	# Save screen size for bounds detection
+
 	
 func _process(delta):
 	pass
