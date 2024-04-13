@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd6e3fjuy7b24"]
+[gd_scene load_steps=9 format=3 uid="uid://bd6e3fjuy7b24"]
 
 [ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
 [ext_resource type="Texture2D" uid="uid://24o3lxr7mxmy" path="res://Art/GiantIdle.png" id="2_qg2r0"]
@@ -22,8 +22,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gb453"]
 size = Vector2(11, 17)
 
+[sub_resource type="Animation" id="Animation_gmuou"]
+resource_name = "text_fade_in"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_soyym"]
+_data = {
+"text_fade_in": SubResource("Animation_gmuou")
+}
+
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_47lmp")
+move_speed = null
 
 [node name="BossSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -46,7 +55,6 @@ grow_vertical = 2
 
 [node name="Dialogue" type="Label" parent="BossSprite/Control"]
 unique_name_in_owner = true
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
@@ -67,21 +75,18 @@ position = Vector2(0, -22)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_gb453")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_soyym")
+}
+
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
-autostart = true
+one_shot = true
 
 [node name="ActionTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="SplitDuration" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 5.0
-one_shot = true
-
-[node name="AttackDialogue" type="AudioStreamPlayer" parent="."]
-
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_special_attack_timer_timeout"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
-[connection signal="timeout" from="SplitDuration" to="." method="_on_split_duration_timeout"]
