@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://djabf0tk6oft4"]
+
+[ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahkjn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqvli"]
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(144, 84)
+script = ExtResource("1_avkas")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_luhud")
+position = Vector2(3.57628e-07, 1.84774e-06)
+scale = Vector2(20, 30)
+texture = SubResource("PlaceholderTexture2D_ahkjn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_yqvli")
