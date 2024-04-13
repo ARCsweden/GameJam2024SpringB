@@ -79,6 +79,9 @@ func _physics_process(delta):
 # Function to start dodging
 func start_dodge():
 	modulate="ffffff50"
+	set_collision_layer_value(2,false)
+	set_collision_mask_value(3,false)
+	set_collision_mask_value(10,false)
 	dodging = true
 	can_dodge = false
 	get_node("DodgeTimer").start()  # Start the dodge duration timer
@@ -87,6 +90,9 @@ func start_dodge():
 # Function to end dodging
 func _end_dodge():
 	modulate="ffffff"
+	set_collision_layer_value(2,true)
+	set_collision_mask_value(3,true)
+	set_collision_mask_value(10,true)
 	dodging = false
 
 # Function to reset dodge availability
