@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://bc1sjffrk83dv"]
+[gd_scene load_steps=3 format=3 uid="uid://bc1sjffrk83dv"]
+
+[ext_resource type="PackedScene" uid="uid://bd6e3fjuy7b24" path="res://Scenes/boss.tscn" id="1_5jub5"]
+[ext_resource type="PackedScene" uid="uid://skgu0onttq34" path="res://Scenes/Player.tscn" id="2_btc1v"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_btc1v")]
+
+[node name="Boss" parent="." instance=ExtResource("1_5jub5")]

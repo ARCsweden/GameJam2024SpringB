@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 # Movement and Dodge Properties
+@export var original_speed := 300
 var speed = 300
 var dodge_speed = 2000
 var dodging = false
@@ -10,6 +11,7 @@ var can_dodge = true      # Flag to check if dodge can be triggered
 
 func _ready():
 	# Initialize Timer for dodge duration
+	GlobalInfo.player = self
 	var dodge_timer = Timer.new()
 	dodge_timer.name = "DodgeTimer"
 	dodge_timer.wait_time = dodge_duration
@@ -25,7 +27,7 @@ func _ready():
 	add_child(cooldown_timer)
 	cooldown_timer.timeout.connect(_reset_dodge)
 
-func _process(delta):
+func _process(_delta):
 	var local_velocity = Vector2.ZERO
 
 	if Input.is_action_just_pressed("attack"):
@@ -68,3 +70,6 @@ func _end_dodge():
 # Function to reset dodge availability
 func _reset_dodge():
 	can_dodge = true
+	
+func set_speed(new_speed: int):
+	speed = new_speed
