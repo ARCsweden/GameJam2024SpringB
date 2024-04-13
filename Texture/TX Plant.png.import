@@ -2,18 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://x6r3wm75hfh5"
-
-path="res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"
+uid="uid://4r745lo7najw"
+path="res://.godot/imported/TX Plant.png-a53f29e5fe2c6be152f6ab6f4c227ffb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/MrOne.png"
-dest_files=["res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"]
+source_file="res://Texture/TX Plant.png"
+dest_files=["res://.godot/imported/TX Plant.png-a53f29e5fe2c6be152f6ab6f4c227ffb.ctex"]
 
 [params]
 

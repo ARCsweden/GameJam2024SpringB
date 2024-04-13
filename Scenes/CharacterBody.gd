@@ -5,7 +5,7 @@ signal hit;
 # Health
 @export var default_max_health = 1000
 var max_health = default_max_health
-var current_health = default_max_health
+@export var current_health = default_max_health
 
 # Movement and Dodge Properties
 
@@ -16,9 +16,9 @@ var current_health = default_max_health
 @export var default_dodge_duration = 0.2
 @export var default_dodge_cooldown = 1
 
-var friction = default_friction
-var acceleration = default_acceleration
-var speed = default_speed
+@export var friction = default_friction
+@export var acceleration = default_acceleration
+@export var speed = default_speed
 var dodge_speed = default_dodge_speed
 
 var dodging = false

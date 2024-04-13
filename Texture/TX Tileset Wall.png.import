@@ -2,18 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://x6r3wm75hfh5"
-
-path="res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"
+uid="uid://cp8ext5102dq"
+path="res://.godot/imported/TX Tileset Wall.png-526daeb56df9976b66fdc83c7f17511d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/MrOne.png"
-dest_files=["res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"]
+source_file="res://Texture/TX Tileset Wall.png"
+dest_files=["res://.godot/imported/TX Tileset Wall.png-526daeb56df9976b66fdc83c7f17511d.ctex"]
 
 [params]
 

@@ -2,18 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://x6r3wm75hfh5"
-
-path="res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"
+uid="uid://crs6h64o1hxva"
+path="res://.godot/imported/TX Player.png-76843177def311f1eac148eee80ba9c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/MrOne.png"
-dest_files=["res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"]
+source_file="res://Texture/TX Player.png"
+dest_files=["res://.godot/imported/TX Player.png-76843177def311f1eac148eee80ba9c3.ctex"]
 
 [params]
 

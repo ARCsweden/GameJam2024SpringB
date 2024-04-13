@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://86r3gwidpktu"]
 
 [ext_resource type="Script" path="res://UI/Bar.gd" id="1_srknb"]
-[ext_resource type="Texture2D" uid="uid://fj5lnhm1bmia" path="res://Sprites/PlayerBar.png" id="2_3ykvg"]
+[ext_resource type="Texture2D" uid="uid://b0bgceuelxf0v" path="res://Sprites/PlayerBar.png" id="2_3ykvg"]
 [ext_resource type="Script" path="res://UI/Test.gd" id="3_bo11d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mutpi"]
