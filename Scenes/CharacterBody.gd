@@ -1,13 +1,33 @@
 extends CharacterBody2D
 
+signal hit;
+
+# Health
+@export var default_max_health = 1000
+var max_health = default_max_health
+var current_health = default_max_health
+
 # Movement and Dodge Properties
-@export var original_speed := 300
-var speed = 300
-var dodge_speed = 2000
+
+=======
+
+@export_range(0.0, 1.0) var default_friction = 0.5
+@export_range(0.0 , 1.0) var default_acceleration = 0.25
+@export var default_speed = 150
+@export var default_dodge_speed = 900
+@export var default_dodge_duration = 0.05
+@export var default_dodge_cooldown = 1
+
+var friction = default_friction
+var acceleration = default_acceleration
+var speed = default_speed
+var dodge_speed = default_dodge_speed
+
 var dodging = false
-var dodge_duration = 0.05
-var dodge_cooldown = 1  # Cooldown duration in seconds
+var dodge_duration = default_dodge_duration
+var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
 var can_dodge = true      # Flag to check if dodge can be triggered
+var axis = Vector2.ZERO
 
 func _ready():
 	# Initialize Timer for dodge duration
@@ -27,45 +47,41 @@ func _ready():
 	add_child(cooldown_timer)
 	cooldown_timer.timeout.connect(_reset_dodge)
 
+
 func _process(_delta):
 	var local_velocity = Vector2.ZERO
+=======
 
+
+func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		$Sword.swing()
 
-	# Handle normal movement
-	if Input.is_action_pressed("ui_right"):
-		local_velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
-		local_velocity.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		local_velocity.y += 1
-	if Input.is_action_pressed("ui_up"):
-		local_velocity.y -= 1
-
-	if local_velocity.length() > 0:
-		local_velocity = local_velocity.normalized() * (dodge_speed if dodging else speed)
-
-	# Check for dodge input
 	if Input.is_action_just_pressed("dodge") and can_dodge:
-		start_dodge(local_velocity.normalized() * dodge_speed if local_velocity.length() > 0 else Vector2(speed, 0))
+		start_dodge()
+	
+	axis.x = Input.get_action_strength("ui_right")-Input.get_action_strength("ui_left")
+	axis.y = Input.get_action_strength("ui_down")-Input.get_action_strength("ui_up")
 
-	# Apply the calculated velocity
-	self.velocity = local_velocity
+	axis = axis.normalized() * (dodge_speed if dodging else speed)
+
+	if axis == Vector2.ZERO:
+		velocity = velocity.lerp(axis, friction)
+	else:
+		velocity = velocity.lerp(axis, acceleration)
+
 	move_and_slide()
 
 # Function to start dodging
-func start_dodge(dodge_dir):
+func start_dodge():
 	dodging = true
 	can_dodge = false
-	self.velocity = dodge_dir
 	get_node("DodgeTimer").start()  # Start the dodge duration timer
 	get_node("CooldownTimer").start()  # Start the cooldown timer
 
 # Function to end dodging
 func _end_dodge():
 	dodging = false
-	self.velocity = Vector2.ZERO  # Reset velocity
 
 # Function to reset dodge availability
 func _reset_dodge():
