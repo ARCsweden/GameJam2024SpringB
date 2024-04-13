@@ -54,7 +54,7 @@ script = ExtResource("1_asnnf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcsd7")
 animation = &"spinning"
-frame_progress = 0.524914
+frame_progress = 0.706667
 offset = Vector2(16, 4)
 
 [node name="Area2D" type="Area2D" parent="."]
