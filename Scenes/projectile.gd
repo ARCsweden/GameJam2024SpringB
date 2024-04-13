@@ -12,7 +12,7 @@ func _physics_process(delta):
 	
 	if proj_vect.length() < 70:
 		pass
-	if count % 100 == 0:
+	elif count % 100 == 0:
 		proj_vect = GlobalInfo.player.global_position - global_position
 	global_position += proj_vect.normalized() * speed * delta
 	count += count;

@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://di5qohj4qk43f"]
+[gd_scene load_steps=10 format=3 uid="uid://1gqn25rqj46k"]
 
-[ext_resource type="Texture2D" uid="uid://dxoge4oyqlfd" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
+[ext_resource type="Texture2D" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
 [ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_asnnf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1h4g4"]
@@ -54,7 +54,7 @@ script = ExtResource("1_asnnf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcsd7")
 animation = &"spinning"
-frame_progress = 0.706667
+frame_progress = 0.865724
 offset = Vector2(16, 4)
 
 [node name="Area2D" type="Area2D" parent="."]

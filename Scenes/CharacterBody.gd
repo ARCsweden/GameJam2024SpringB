@@ -17,7 +17,7 @@ var max_health = default_max_health
 @export var default_dodge_cooldown = 1
 
 
-var default_zoom := 8
+var default_zoom := 4
 
 @export var friction = default_friction
 @export var acceleration = default_acceleration
