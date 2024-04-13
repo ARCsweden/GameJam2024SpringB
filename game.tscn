@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://bc1sjffrk83dv"]
+[gd_scene load_steps=3 format=3 uid="uid://bc1sjffrk83dv"]
+
+[ext_resource type="PackedScene" uid="uid://ufuabbntbuwr" path="res://Scenes/Arena.tscn" id="1_nrhgy"]
+[ext_resource type="PackedScene" uid="uid://djabf0tk6oft4" path="res://Scenes/Player.tscn" id="2_mafh7"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Arena" parent="." instance=ExtResource("1_nrhgy")]
+
+[node name="Player" parent="." instance=ExtResource("2_mafh7")]
