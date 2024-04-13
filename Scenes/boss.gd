@@ -12,8 +12,8 @@ var projectile = preload("res://Scenes/projectile.tscn")
 
 var current_x_direction
 var current_y_direction
-
-var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_resolution]
+# modify_fps, modify_player_speed, modify_zoom, modify_resolution, 
+var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_resolution, modify_player_health, modify_map]
 enum {SPLIT, RESTORE}
 
 enum directions{POSITIVE = 1, NEGATIVE = -1, NEUTRAL = 0}
@@ -35,9 +35,10 @@ func _ready():
 func _process(_delta):
 	var index = 0
 	for timer in active_timers:
-		if timer.time_left == 0:
-			timer.queue_free()
-			active_timers.remove_at(index)
+		if timer != null:
+			if timer.time_left == 0:
+				timer.queue_free()
+				active_timers.remove_at(index)
 		index += index
 func _physics_process(_delta):
 # Add the gravity.
@@ -139,20 +140,31 @@ func modify_zoom(mode: int):
 			print("Restoring Zoom")
 			
 func modify_resolution(mode: int):
-	#DisplayServer.WINDOW_MODE_WINDOWED
+	var curr_size = DisplayServer.window_get_size()
 	match mode:
 		SPLIT:
-			DisplayServer.window_set_size(display_size / 2)
+			DisplayServer.window_set_size(curr_size / 2)
 			print("Splitting Resolution")
 		RESTORE:
 			
-			#DisplayServer.WINDOW_MODE_FULLSCREEN
 			DisplayServer.window_set_size(display_size)
 			
 			print("Splitting Resolution")
 		
 
-		
+func modify_map(mode: int):
+	match mode:
+		SPLIT:
+			GlobalInfo.arena.splitTheWorld()
+		RESTORE:
+			GlobalInfo.arena.fixTheWorld()
+			
+func modify_player_health(mode: int):
+	match mode:
+		SPLIT:
+			GlobalInfo.player.set_health(GlobalInfo.player.current_health / 2)
+		RESTORE:
+			GlobalInfo.player.set_health(GlobalInfo.player.current_health * 2)
 func cleanup(trash : Resource):
 	trash.queue_free()
 

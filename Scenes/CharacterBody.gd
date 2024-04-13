@@ -98,3 +98,6 @@ func set_speed(new_speed: int):
 	
 func set_zoom(new_zoom : Vector2):
 	$Camera2D.zoom = new_zoom
+	
+func set_health(new_health: int):
+	current_health = new_health
