@@ -104,9 +104,7 @@ collision_mask = 2
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_w5bt8")
 
-
-[node name="HitSound" type="AudioStreamPlayer" parent="."]
-
+[node name="Hitsound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_2uit3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

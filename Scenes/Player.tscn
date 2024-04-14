@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
-
 [ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
 [ext_resource type="PackedScene" uid="uid://86r3gwidpktu" path="res://Scenes/Bars.tscn" id="4_x6wiy"]
 [ext_resource type="PackedScene" uid="uid://dmoi3di3robg4" path="res://Scenes/debug.tscn" id="6_ycbup"]
@@ -194,6 +193,7 @@ collision_mask = 4
 position = Vector2(-4, -16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_2xbs3")
+disabled = true
 debug_color = Color(0.905882, 0.305882, 0, 0.419608)
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
