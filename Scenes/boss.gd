@@ -26,7 +26,9 @@ var state := 0
 enum BossStates{idle, melee_attack, special_attack, talking}
 var is_in_melee_area := false
 
-var attacking = false
+
+var Boss_Bar = GlobalInfo.Boss_Bar
+
 
 func _ready():
 	GlobalInfo.boss = self
@@ -36,6 +38,8 @@ func _ready():
 	set_direction(axis.y, directions.POSITIVE)
 	Engine.max_fps = 30
 	connect("delete_me",cleanup)
+	
+	GlobalInfo.Boss_Bar.attrib_max = health
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -128,6 +132,8 @@ func take_damage(damage_taken: int):
 		die()
 	else:
 		health -= damage_taken
+		
+	GlobalInfo.Boss_Bar.attrib = health
 	
 func die():
 	queue_free()
