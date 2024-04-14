@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc1sjffrk83dv"]
+
+[gd_scene load_steps=6 format=3 uid="uid://bc1sjffrk83dv"]
+
 
 [ext_resource type="PackedScene" uid="uid://skgu0onttq34" path="res://Scenes/Player.tscn" id="2_mafh7"]
 [ext_resource type="PackedScene" uid="uid://bd6e3fjuy7b24" path="res://Scenes/boss.tscn" id="3_7y1nh"]
+
 [ext_resource type="PackedScene" uid="uid://bom7ruxndjg2g" path="res://Scenes/ClosedArena.tscn" id="3_76ysh"]
-[ext_resource type="PackedScene" uid="uid://2jsk3ccok47s" path="res://Scenes/Text.tscn" id="4_132y1"]
-[ext_resource type="PackedScene" uid="uid://c25weyvqib4iw" path="res://Scenes/UI.tscn" id="4_duvu3"]
+[ext_resource type="PackedScene" path="res://Scenes/Text.tscn" id="4_132y1"]
 [ext_resource type="PackedScene" path="res://Scenes/BossBar.tscn" id="4_t7ofk"]
+
 
 [node name="Game" type="Node2D"]
 

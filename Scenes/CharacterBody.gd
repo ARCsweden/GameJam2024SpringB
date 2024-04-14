@@ -159,9 +159,8 @@ func set_zoom(new_zoom : Vector2):
 	$Camera2D.zoom = new_zoom
 	
 func set_health(new_health: int):
-	#current_health = new_health
-	if current_health <= 0:
-		game_over()
+	current_health = new_health
+		
 		
 func game_over():
 	if !game_is_over:
@@ -186,7 +185,7 @@ func _end_attack():
 func take_damage(damage_taken: int):
 	if current_health - damage_taken == 0:
 		current_health = 0
-		die()
+		game_over()
 	else:
 		current_health -= damage_taken
 	hp.value = current_health

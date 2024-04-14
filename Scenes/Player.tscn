@@ -174,11 +174,6 @@ limit_bottom = 655
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
-[node name="Debug" parent="." instance=ExtResource("6_ycbup")]
-layer = 20
-path_to_node = NodePath("../CharacterBody2D")
-properties = ["current_health", "velocity", "speed", "acceleration", "friction"]
-
 [node name="DodgeSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
 stream = ExtResource("8_nwxsi")
 volume_db = -13.0
@@ -202,6 +197,11 @@ volume_db = -10.0
 [node name="AttackHitSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
 stream = ExtResource("8_x1xsp")
 volume_db = 5.0
+
+[node name="Debug" parent="." instance=ExtResource("6_ycbup")]
+layer = 20
+path_to_node = NodePath("../CharacterBody2D")
+properties = ["current_health", "velocity", "speed", "acceleration", "friction"]
 
 [connection signal="area_entered" from="CharacterBody2D/AttackHitReg" to="CharacterBody2D" method="_on_attack_hit_reg_area_entered"]
 [connection signal="body_entered" from="CharacterBody2D/AttackHitReg" to="CharacterBody2D" method="_on_attack_hit_reg_body_entered"]

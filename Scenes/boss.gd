@@ -17,7 +17,7 @@ var current_x_direction
 var current_y_direction
 
 # modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map, 
-var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map]
+var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_player_health, modify_map]
 
 enum {SPLIT, RESTORE}
 
@@ -226,13 +226,6 @@ func modify_player_health(id: int, mode: int):
 		RESTORE:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health * 2)
 			GlobalInfo.ui.remove_debuff(id)
-			
-func modify_resolution(mode: int):
-	match mode:
-		SPLIT:
-			pass
-		RESTORE:
-			pass
 
 func cleanup(trash : Resource):
 	trash.queue_free()
