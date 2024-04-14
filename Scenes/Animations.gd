@@ -5,7 +5,7 @@ func _ready():
 	pass
 	
 func walk():
-	play("walk")
+	play("walkR")
 	
 func attack():
 	play("attack")

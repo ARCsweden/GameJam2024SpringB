@@ -38,7 +38,7 @@ var can_dodge = true      # Flag to check if dodge can be triggered
 var axis = Vector2.ZERO
 var cooldown_timer
 
-enum PlayerState{idle,walking,attacking}
+enum PlayerState{idle,walkingL,walkingR,attacking}
 var currentState = PlayerState.idle
 
 func _ready():
@@ -105,7 +105,12 @@ func _physics_process(delta):
 		velocity = velocity.lerp(axis, friction)
 	else:
 		if (currentState!=PlayerState.attacking):
-			currentState=PlayerState.walking
+			if axis.x >= 0:
+				currentState=PlayerState.walkingR
+				$Animations.flip_h = false
+			elif axis.x < 0:
+				currentState=PlayerState.walkingL
+				$Animations.flip_h = true
 			$Animations.walk()
 		velocity = velocity.lerp(axis, acceleration)
 	
@@ -151,16 +156,13 @@ func set_health(new_health: int):
 func start_attack():
 	currentState=PlayerState.attacking
 	get_node("AttackTimer").start()
+	$AttackSound.play()
 	$Animations.attack()
 	$AttackHitReg/AttackHitBox.set_disabled(false)
 
 func _end_attack():
 	$AttackHitReg/AttackHitBox.set_disabled(true)
 	currentState=PlayerState.idle
-	
-
-func _on_attack_hit_reg_area_entered(area):
-	GlobalInfo.boss.take_damage(1000)
 	
 
 	hp.value = current_health
@@ -176,3 +178,7 @@ func take_damage(damage_taken: int):
 func die():
 	queue_free()
 
+
+func _on_attack_hit_reg_body_entered(body):
+	$AttackHitSound.play()
+	GlobalInfo.boss.take_damage(1000)
