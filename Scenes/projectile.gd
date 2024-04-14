@@ -6,8 +6,9 @@ var count = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	proj_vect = GlobalInfo.player.global_position - GlobalInfo.boss.global_position
-	$AnimatedSprite2D.play()
+	if GlobalInfo.player != null:
+		proj_vect = GlobalInfo.player.global_position - GlobalInfo.boss.global_position
+		$AnimatedSprite2D.play()
 	
 func _physics_process(delta):
 	
