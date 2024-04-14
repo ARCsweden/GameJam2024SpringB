@@ -108,9 +108,11 @@ func _physics_process(delta):
 			if axis.x >= 0:
 				currentState=PlayerState.walkingR
 				$Animations.flip_h = false
+				$Bars.position.x = -40
 			elif axis.x < 0:
 				currentState=PlayerState.walkingL
 				$Animations.flip_h = true
+				$Bars.position.x = -15
 			$Animations.walk()
 		velocity = velocity.lerp(axis, acceleration)
 	
