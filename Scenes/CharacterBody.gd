@@ -79,6 +79,7 @@ func _physics_process(delta):
 # Function to start dodging
 func start_dodge():
 	modulate="ffffff50"
+	$DodgeSound.play()
 	set_collision_layer_value(2,false)
 	set_collision_mask_value(3,false)
 	set_collision_mask_value(10,false)
