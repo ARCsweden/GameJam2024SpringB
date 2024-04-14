@@ -235,8 +235,9 @@ func melee_attack():
 
 func _on_melee_area_body_entered(body):
 	is_in_melee_area = true
+	if $MeleeAttackTimer.time_left == 0: $MeleeSound.play()
 	$MeleeAttackTimer.start()
-	$MeleeSound.play()
+	
 	
 func _on_melee_attack_timer_timeout():
 	$MeleeAttackTimer.stop()
