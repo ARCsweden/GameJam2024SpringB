@@ -108,3 +108,13 @@ func set_zoom(new_zoom : Vector2):
 	
 func set_health(new_health: int):
 	current_health = new_health
+	
+func take_damage(damage_taken: int):
+	if current_health - damage_taken == 0:
+		current_health = 0
+		die()
+	else:
+		current_health -= damage_taken
+	
+func die():
+	queue_free()

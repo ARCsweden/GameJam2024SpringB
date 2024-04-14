@@ -1,4 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc8cbuu5tcd0a"]
+
+[gd_scene load_steps=13 format=3 uid="uid://1gqn25rqj46k"]
+
 
 [ext_resource type="Texture2D" uid="uid://dxoge4oyqlfd" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
 [ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_asnnf"]
@@ -49,13 +51,51 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w5bt8"]
 
+[sub_resource type="Animation" id="Animation_8b1bt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_edpn0"]
+resource_name = "die"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_disnh"]
+_data = {
+"RESET": SubResource("Animation_8b1bt"),
+"die": SubResource("Animation_edpn0")
+}
+
 [node name="Projectile" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_asnnf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcsd7")
 animation = &"spinning"
-frame_progress = 0.865724
+frame_progress = 0.00697568
 offset = Vector2(16, 4)
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -66,6 +106,17 @@ collision_mask = 2
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_w5bt8")
 
+
+[node name="Hitsound" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Hitsound")
+libraries = {
+"": SubResource("AnimationLibrary_disnh")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h2hag")
 volume_db = -15.0

@@ -1,36 +1,66 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd6e3fjuy7b24"]
+[gd_scene load_steps=9 format=3 uid="uid://bd6e3fjuy7b24"]
 
 [ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
-[ext_resource type="Texture2D" uid="uid://24o3lxr7mxmy" path="res://Art/GiantIdle.png" id="2_qg2r0"]
+[ext_resource type="Texture2D" uid="uid://m4tb3pv5ameg" path="res://Sprites/MrTwo.png" id="2_7feg0"]
 [ext_resource type="FontFile" uid="uid://gwj8gnrvc0vy" path="res://Fonts/PeaberryBase.ttf" id="3_rbw6q"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_00qwk"]
-atlas = ExtResource("2_qg2r0")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1uiq"]
+atlas = ExtResource("2_7feg0")
+region = Rect2(0, 0, 136, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2swsb"]
+atlas = ExtResource("2_7feg0")
+region = Rect2(136, 0, 136, 145)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_looa7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_00qwk")
+"texture": SubResource("AtlasTexture_o1uiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2swsb")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"melee_attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"special_attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"talking",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb453"]
-size = Vector2(11, 17)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ims3m"]
+radius = 16.0
+height = 123.25
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmy05"]
+radius = 135.0
+height = 342.0
 
 [node name="Boss" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_47lmp")
 
 [node name="BossSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(80, -256)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_looa7")
+animation = &"talking"
 
 [node name="Control" type="Control" parent="BossSprite"]
 layout_mode = 3
@@ -65,19 +95,28 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -22)
+position = Vector2(5, -248)
 scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_gb453")
+shape = SubResource("CapsuleShape2D_ims3m")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="SpecialAttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 10.0
 autostart = true
 
-[node name="ActionTimer" type="Timer" parent="."]
-autostart = true
+[node name="MeleeAttackTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="AttackDialogue" type="AudioStreamPlayer" parent="."]
 
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
+[node name="MeleeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
+position = Vector2(1, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jmy05")
+
+[connection signal="timeout" from="SpecialAttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="MeleeAttackTimer" to="." method="_on_melee_attack_timer_timeout"]
+[connection signal="body_entered" from="MeleeArea" to="." method="_on_melee_area_body_entered"]
+[connection signal="body_exited" from="MeleeArea" to="." method="_on_melee_area_body_exited"]
