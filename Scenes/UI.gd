@@ -5,6 +5,9 @@ extends Control
 @onready var GameOverRect = $GameOver/GameOverRect
 @onready var GameOverAnim = $GameOver/GameOverAnimation
 @onready var GameOverText = $GameOver/GameOverText
+@onready var MissionAccomplishedRect = $MissionAccomplished/MissionAccomplishedRect
+@onready var MissionAccomplishedAnim = $MissionAccomplished/MissionAccomplishedAnimation
+@onready var MissionAccomplishedText = $MissionAccomplished/MissionAccomplishedText
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +35,14 @@ func update_text():
 	
 func game_over():
 	GameOverAnim.play("fade_to_black")
+	
+func mission_accomplished():
+	MissionAccomplishedAnim.play("win_anim")
 
 func _on_game_over_animation_animation_finished(anim_name):
 	if anim_name == "fade_to_black":
 		GameOverText.visible = true
+
+
+func _on_mission_accomplished_animation_animation_finished(anim_name):
+	pass

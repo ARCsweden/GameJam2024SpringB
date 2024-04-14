@@ -144,7 +144,10 @@ func take_damage(damage_taken: int):
 	GlobalInfo.Boss_Bar.attrib = health
 	
 func die():
-	queue_free()
+	GlobalInfo.ui.mission_accomplished()
+	await get_tree().create_timer(5.0).timeout
+	get_tree().reload_current_scene()
+
 
 func ranged_attack():
 	var active_projectile = projectile.instantiate()

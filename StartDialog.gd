@@ -42,3 +42,7 @@ func _on_timeout_timeout():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	dialog = "Det här är ett intro för spelet, Den inehåller story motivationer och är otroligt spännande. Faktiska spelet startar 10 sec efter det här är klart.........................................."
+
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		_on_timeout_timeout()
