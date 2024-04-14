@@ -6,8 +6,9 @@ var count = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	proj_vect = GlobalInfo.player.global_position - GlobalInfo.boss.global_position
-	$AnimatedSprite2D.play()
+	if GlobalInfo.player != null:
+		proj_vect = GlobalInfo.player.global_position - GlobalInfo.boss.global_position
+		$AnimatedSprite2D.play()
 	
 func _physics_process(delta):
 	
@@ -23,9 +24,7 @@ func _on_area_2d_body_entered(body):
 	
 func _on_animation_player_animation_finished(_anim_name):
 	GlobalInfo.boss.special_attack()
-	$HitSound.play()
-
-
+	$Hitsound.play()
 
 func _on_audio_stream_player_finished():
 	queue_free()

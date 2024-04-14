@@ -41,7 +41,11 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	
+	if $MeleeAttackTimer.time_left > 0:
+		state = BossStates.melee_attack
+	else:
+		state = BossStates.idle
+		
 	match state:
 		BossStates.idle:
 			$BossSprite.play("idle")
@@ -62,9 +66,10 @@ func _process(_delta):
 		index += index
 func _physics_process(delta):
 # Add the gravity.
+	if GlobalInfo.player != null:
+		velocity = global_position.direction_to(GlobalInfo.player.global_position)
+		move_and_collide(velocity * move_speed * delta)
 	
-	velocity = global_position.direction_to(GlobalInfo.player.global_position)
-	move_and_collide(velocity * move_speed * delta)
 	
 func special_attack():
 	
@@ -203,19 +208,18 @@ func cleanup(trash : Resource):
 	trash.queue_free()
 
 func melee_attack():
-	pass
+	GlobalInfo.player.take_damage(250)
 
 func _on_melee_area_body_entered(body):
 	is_in_melee_area = true
-	melee_attack()
 	$MeleeAttackTimer.start()
 	
-
 func _on_melee_attack_timer_timeout():
+	$MeleeAttackTimer.stop()
 	if is_in_melee_area == true:
 		melee_attack()
 
 
 func _on_melee_area_body_exited(body):
 	is_in_melee_area = false
-	$MeleeAttackTimer.stop()
+	
