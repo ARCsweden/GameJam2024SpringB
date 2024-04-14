@@ -7,6 +7,12 @@ signal hit;
 var max_health = default_max_health
 @export var current_health = default_max_health
 
+#@onready var hp = $"../Bars"/HP
+#@onready var energy = $"../Bars"/Energy
+
+@onready var hp = $Bars/HP
+@onready var energy = $Bars/Energy
+
 # Movement and Dodge Properties
 
 @export_range(0.0, 1.0) var default_friction = 0.5
@@ -30,6 +36,7 @@ var dodge_duration = default_dodge_duration
 var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
 var can_dodge = true      # Flag to check if dodge can be triggered
 var axis = Vector2.ZERO
+var cooldown_timer
 
 func _ready():
 	
@@ -43,16 +50,23 @@ func _ready():
 	dodge_timer.timeout.connect(_end_dodge)
 
 	# Initialize Timer for dodge cooldown
-	var cooldown_timer = Timer.new()
+	cooldown_timer = Timer.new()
 	cooldown_timer.name = "CooldownTimer"
 	cooldown_timer.wait_time = dodge_cooldown
 	cooldown_timer.one_shot = true
 	add_child(cooldown_timer)
 	cooldown_timer.timeout.connect(_reset_dodge)
+	
+	# Initilize stuff for bar UI
+	hp.attrib_max = default_max_health
+	energy.attrib_max = dodge_cooldown
+	
 
 
 func _process(_delta):
 	var local_velocity = Vector2.ZERO
+	
+	energy.attrib = dodge_cooldown - cooldown_timer.get_time_left()
 
 
 func _physics_process(delta):
@@ -87,6 +101,8 @@ func start_dodge():
 	can_dodge = false
 	get_node("DodgeTimer").start()  # Start the dodge duration timer
 	get_node("CooldownTimer").start()  # Start the cooldown timer
+	
+	energy.attrib = 0
 
 # Function to end dodging
 func _end_dodge():
@@ -100,6 +116,8 @@ func _end_dodge():
 func _reset_dodge():
 	can_dodge = true
 	
+	energy.attrib = dodge_cooldown
+	
 func set_speed(new_speed: int):
 	speed = new_speed
 	
@@ -108,6 +126,7 @@ func set_zoom(new_zoom : Vector2):
 	
 func set_health(new_health: int):
 	current_health = new_health
+	hp.value = current_health
 	
 func take_damage(damage_taken: int):
 	if current_health - damage_taken == 0:
@@ -115,6 +134,7 @@ func take_damage(damage_taken: int):
 		die()
 	else:
 		current_health -= damage_taken
+  hp.value = current_health
 	
 func die():
 	queue_free()
