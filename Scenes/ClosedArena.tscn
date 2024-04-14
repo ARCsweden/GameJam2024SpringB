@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ce5d74ohrtqub"]
+[gd_scene load_steps=9 format=3 uid="uid://bom7ruxndjg2g"]
 
 [ext_resource type="Texture2D" uid="uid://f5d83s225fld" path="res://Tiles/GRASS+.png" id="1_q86f1"]
 [ext_resource type="Script" path="res://Scenes/ClosedArena.gd" id="1_qntxe"]
