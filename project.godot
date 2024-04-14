@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SplitGame"
-run/main_scene="res://game.tscn"
+run/main_scene="res://Scenes/Intro.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -41,4 +41,5 @@ attack={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 window/size/mode=3
