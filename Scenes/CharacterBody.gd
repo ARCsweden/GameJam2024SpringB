@@ -134,7 +134,7 @@ func take_damage(damage_taken: int):
 		die()
 	else:
 		current_health -= damage_taken
-  hp.value = current_health
+	hp.value = current_health
 	
 func die():
 	queue_free()
