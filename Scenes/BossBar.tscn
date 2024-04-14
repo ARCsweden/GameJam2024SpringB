@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxa72b0mm3ryq"]
+
+[ext_resource type="Texture2D" uid="uid://nwnt3pxm2a7x" path="res://Sprites/EnemyHealthbar.png" id="1_2qyje"]
+[ext_resource type="Script" path="res://UI/Bar.gd" id="1_ag60f"]
+[ext_resource type="Script" path="res://UI/BossBar.gd" id="1_guan2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r87xc"]
+atlas = ExtResource("1_2qyje")
+region = Rect2(0, 1, 80, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3d0j"]
+atlas = ExtResource("1_2qyje")
+region = Rect2(0, 17, 80, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um5da"]
+atlas = ExtResource("1_2qyje")
+region = Rect2(0, 10, 80, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtkgm"]
+atlas = ExtResource("1_2qyje")
+region = Rect2(0, 24, 80, 8)
+
+[node name="BossBar" type="CanvasLayer"]
+script = ExtResource("1_guan2")
+
+[node name="BossHp" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.0536458
+anchor_right = 0.942187
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 1025.0
+offset_right = -45.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+nine_patch_stretch = true
+texture_over = SubResource("AtlasTexture_r87xc")
+texture_progress = SubResource("AtlasTexture_k3d0j")
+script = ExtResource("1_ag60f")
+metadata/_edit_use_anchors_ = true
+
+[node name="Damage" type="TextureProgressBar" parent="BossHp"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 70.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_um5da")
+texture_progress = SubResource("AtlasTexture_jtkgm")
+
+[node name="Timer" type="Timer" parent="BossHp"]
+one_shot = true
+
+[connection signal="timeout" from="BossHp/Timer" to="BossHp" method="_on_timer_timeout"]

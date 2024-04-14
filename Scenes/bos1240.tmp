@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd6e3fjuy7b24"]
+
+[ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
+[ext_resource type="Texture2D" uid="uid://24o3lxr7mxmy" path="res://Art/GiantIdle.png" id="2_qg2r0"]
+[ext_resource type="FontFile" uid="uid://gwj8gnrvc0vy" path="res://Fonts/PeaberryBase.ttf" id="3_rbw6q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00qwk"]
+atlas = ExtResource("2_qg2r0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_looa7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00qwk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb453"]
+size = Vector2(11, 17)
+
+[node name="Boss" type="CharacterBody2D"]
+script = ExtResource("1_47lmp")
+
+[node name="BossSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_looa7")
+
+[node name="Control" type="Control" parent="BossSprite"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -66.0
+offset_right = -14.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialogue" type="Label" parent="BossSprite/Control"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -129.5
+offset_right = 129.5
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_rbw6q")
+theme_override_font_sizes/font_size = 16
+text = "I am using my special move: Your FPS is split in two"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_gb453")
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+autostart = true
+
+[node name="ActionTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SplitDuration" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="AttackDialogue" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
+[connection signal="timeout" from="SplitDuration" to="." method="_on_split_duration_timeout"]
