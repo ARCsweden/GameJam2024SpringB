@@ -134,7 +134,13 @@ func start_attack():
 	currentState=PlayerState.attacking
 	get_node("AttackTimer").start()
 	$Animations.attack()
-	
+	$AttackHitReg/AttackHitBox.set_disabled(false)
+
 func _end_attack():
+	$AttackHitReg/AttackHitBox.set_disabled(true)
 	currentState=PlayerState.idle
+	
+
+func _on_attack_hit_reg_area_entered(area):
+	GlobalInfo.boss.take_damage(1000)
 	
