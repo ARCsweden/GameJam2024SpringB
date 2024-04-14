@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal delete_me
+
 @export var move_speed := 100
 
 @onready var attack_timer = %AttackTimer
@@ -21,6 +22,7 @@ enum axis{x,y}
 var movement = ["up", "down", "left", "right", "up_right", "up_left", "down_right", "down_left"]
 var display_size
 var target
+var id = 0
 
 func _ready():
 	GlobalInfo.boss = self
@@ -56,13 +58,13 @@ func special_attack():
 	debuff_duration_timer.one_shot = true
 	
 	var	current_attack = attack_functions.pick_random()
-
-	current_attack.call(SPLIT)
-	debuff_duration_timer.connect("timeout", current_attack.bind(RESTORE))
+	id += 1
+	current_attack.call(id, SPLIT)
+	debuff_duration_timer.connect("timeout", current_attack.bind(id, RESTORE))
 	debuff_duration_timer.start()
 	active_timers.append(debuff_duration_timer)
 	
-func set_direction(temp :int, direction: int):
+func set_direction(temp: int, direction: int):
 	
 	match temp:
 		axis.x:
@@ -108,63 +110,79 @@ func ranged_attack():
 func _on_attack_timer_timeout():
 		ranged_attack()
 	
-func modify_fps(mode: int):
+func modify_fps(id: int, mode: int):
 	
 	const normal_fps = 30
+	const name = "FPS SPLIT"
 	
 	match mode:
 		SPLIT:
 			Engine.max_fps = normal_fps / 2
 			print("Splitting FPS")
+			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:
 			Engine.max_fps = normal_fps
 			print("Restoring FPS")
+			GlobalInfo.ui.remove_debuff(id)
 
-func modify_player_speed(mode: int):
-	
+func modify_player_speed(id: int, mode: int):
+	const name = "SPEED SPLIT"
 	match mode:
 		SPLIT:
 			target.set_speed(target.speed / 2)
 			print("Splitting Speed")
+			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:
 			GlobalInfo.player.set_speed(target.default_speed)
 			print("Restoring Speed")
+			GlobalInfo.ui.remove_debuff(id)
 	
-func modify_zoom(mode: int):
+func modify_zoom(id: int, mode: int):
+	const name = "ZOOM SPLIT"
 	match mode:
 		SPLIT:
 			target.set_zoom(Vector2(target.default_zoom / 2, target.default_zoom / 2))
 			print("Splitting Zoom")
+			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:
 			target.set_zoom(Vector2(target.default_zoom, target.default_zoom))
 			print("Restoring Zoom")
+			GlobalInfo.ui.remove_debuff(id)
 			
-func modify_resolution(mode: int):
+func modify_resolution(id: int, mode: int):
+	const name = "WINDOW SPLIT"
 	var curr_size = DisplayServer.window_get_size()
 	match mode:
 		SPLIT:
 			DisplayServer.window_set_size(curr_size / 2)
 			print("Splitting Resolution")
-		RESTORE:
-			
-			DisplayServer.window_set_size(display_size)
-			
+			GlobalInfo.ui.add_debuff(id, name)
+		RESTORE:			
+			DisplayServer.window_set_size(display_size)			
 			print("Splitting Resolution")
+			GlobalInfo.ui.remove_debuff(id)
 		
 
-func modify_map(mode: int):
+func modify_map(id: int, mode: int):
+	const name = "WORLD SPLIT"
 	match mode:
 		SPLIT:
 			GlobalInfo.arena.splitTheWorld()
+			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:
 			GlobalInfo.arena.fixTheWorld()
+			GlobalInfo.ui.remove_debuff(id)
 			
-func modify_player_health(mode: int):
+func modify_player_health(id: int, mode: int):
+	const name = "HEALTH SPLIT"
 	match mode:
 		SPLIT:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health / 2)
+			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health * 2)
+			GlobalInfo.ui.remove_debuff(id)
+
 func cleanup(trash : Resource):
 	trash.queue_free()
 
