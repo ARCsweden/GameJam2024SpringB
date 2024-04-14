@@ -14,7 +14,7 @@ var projectile = preload("res://Scenes/projectile.tscn")
 var current_x_direction
 var current_y_direction
 # modify_fps, modify_player_speed, modify_zoom, modify_resolution, 
-var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_resolution, modify_player_health, modify_map]
+var attack_functions = [modify_player_health]#[modify_fps, modify_player_speed, modify_zoom, modify_resolution, modify_player_health, modify_map]
 enum {SPLIT, RESTORE}
 
 enum directions{POSITIVE = 1, NEGATIVE = -1, NEUTRAL = 0}
@@ -182,6 +182,8 @@ func modify_player_health(id: int, mode: int):
 		RESTORE:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health * 2)
 			GlobalInfo.ui.remove_debuff(id)
+
+
 
 func cleanup(trash : Resource):
 	trash.queue_free()

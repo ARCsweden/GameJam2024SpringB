@@ -30,6 +30,7 @@ var dodge_duration = default_dodge_duration
 var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
 var can_dodge = true      # Flag to check if dodge can be triggered
 var axis = Vector2.ZERO
+var game_is_over = false
 
 func _ready():
 	
@@ -106,4 +107,13 @@ func set_zoom(new_zoom : Vector2):
 	$Camera2D.zoom = new_zoom
 	
 func set_health(new_health: int):
-	current_health = new_health
+	#TODO: CHANGE, THIS IF FOR TESTING GAME OVER
+	current_health = -1
+	#current_health = new_health
+	if current_health <= 0:
+		game_over()
+		
+func game_over():
+	if !game_is_over:
+		game_is_over = true
+		GlobalInfo.ui.game_over()

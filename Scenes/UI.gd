@@ -2,10 +2,14 @@ extends Control
 
 @export var debuffDict = {}
 @onready var DebuffList = $DebuffList
+@onready var GameOverRect = $GameOver/GameOverRect
+@onready var GameOverAnim = $GameOver/GameOverAnimation
+@onready var GameOverText = $GameOver/GameOverText
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GlobalInfo.ui = self
+	GameOverRect.set_color(Color(0, 0, 0, 0))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,3 +29,10 @@ func update_text():
 		var debuffName = debuffDict[key]
 		txt += debuffName + "\n"
 	DebuffList.text = txt
+	
+func game_over():
+	GameOverAnim.play("fade_to_black")
+
+func _on_game_over_animation_animation_finished(anim_name):
+	if anim_name == "fade_to_black":
+		GameOverText.visible = true
