@@ -36,12 +36,16 @@ var dodge_duration = default_dodge_duration
 var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
 var can_dodge = true      # Flag to check if dodge can be triggered
 var axis = Vector2.ZERO
+
+var game_is_over = false
+
 var cooldown_timer
 
 enum PlayerState{idle,walkingL,walkingR,attacking}
 var currentState = PlayerState.idle
 
 var can_attack = true
+
 
 func _ready():
 	
@@ -156,6 +160,12 @@ func set_zoom(new_zoom : Vector2):
 	
 func set_health(new_health: int):
 	current_health = new_health
+		
+		
+func game_over():
+	if !game_is_over:
+		game_is_over = true
+		GlobalInfo.ui.game_over()
 	
 func start_attack():
 	currentState=PlayerState.attacking
@@ -169,21 +179,19 @@ func _end_attack():
 	$AttackHitReg/AttackHitBox.set_disabled(true)
 	can_attack=true
 	currentState=PlayerState.idle
-	
 
 	hp.value = current_health
 	
 func take_damage(damage_taken: int):
 	if current_health - damage_taken == 0:
 		current_health = 0
-		die()
+		game_over()
 	else:
 		current_health -= damage_taken
 	hp.value = current_health
 	
 func die():
 	queue_free()
-
 
 func _on_attack_hit_reg_body_entered(body):
 	$AttackHitSound.play()

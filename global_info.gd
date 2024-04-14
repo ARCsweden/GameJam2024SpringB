@@ -6,5 +6,5 @@ var Boss_Dialog
 var Boss_Bar
 
 var arena
-
+var ui
 
