@@ -198,7 +198,7 @@ debug_color = Color(0.905882, 0.305882, 0, 0.419608)
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
 stream = ExtResource("7_cd3en")
-volume_db = -6.0
+volume_db = -10.0
 
 [node name="AttackHitSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
 stream = ExtResource("8_x1xsp")

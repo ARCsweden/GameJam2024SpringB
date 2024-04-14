@@ -41,6 +41,8 @@ var cooldown_timer
 enum PlayerState{idle,walkingL,walkingR,attacking}
 var currentState = PlayerState.idle
 
+var can_attack = true
+
 func _ready():
 	
 	# Initialize Timer for attack state duration
@@ -86,7 +88,7 @@ func _physics_process(delta):
 	
 	
 	
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and can_attack:
 		start_attack()
 		
 
@@ -157,6 +159,7 @@ func set_health(new_health: int):
 	
 func start_attack():
 	currentState=PlayerState.attacking
+	can_attack=false
 	get_node("AttackTimer").start()
 	$AttackSound.play()
 	$Animations.attack()
@@ -164,6 +167,7 @@ func start_attack():
 
 func _end_attack():
 	$AttackHitReg/AttackHitBox.set_disabled(true)
+	can_attack=true
 	currentState=PlayerState.idle
 	
 
@@ -183,4 +187,4 @@ func die():
 
 func _on_attack_hit_reg_body_entered(body):
 	$AttackHitSound.play()
-	GlobalInfo.boss.take_damage(1000)
+	GlobalInfo.boss.take_damage(100)
