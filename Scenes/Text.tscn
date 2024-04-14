@@ -34,11 +34,10 @@ drag_and_drop_selection_enabled = false
 script = ExtResource("1_noxye")
 
 [node name="TimerCharacter" type="Timer" parent="BossDialog"]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="Timeout" type="Timer" parent="BossDialog"]
-wait_time = 5.0
 one_shot = true
 
 [connection signal="timeout" from="BossDialog/TimerCharacter" to="BossDialog" method="_on_timer_timeout"]

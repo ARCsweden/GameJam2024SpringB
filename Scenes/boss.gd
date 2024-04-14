@@ -98,6 +98,7 @@ func special_attack():
 	debuff_duration_timer.start()
 	active_timers.append(debuff_duration_timer)
 	
+	
 func set_direction(temp: int, direction: int):
 	
 	match temp:
@@ -148,6 +149,7 @@ func die():
 
 func ranged_attack():
 	var active_projectile = projectile.instantiate()
+	GlobalInfo.Boss_Dialog.dialog = "I perfom my speciall move, SPLIT IN TWO"
 	add_child(active_projectile)
 	
 func _on_attack_timer_timeout():
@@ -170,6 +172,7 @@ func modify_fps(id: int, mode: int):
 
 func modify_player_speed(id: int, mode: int):
 	const name = "SPEED SPLIT"
+	
 	match mode:
 		SPLIT:
 			target.set_speed(target.speed / 2)
@@ -182,6 +185,7 @@ func modify_player_speed(id: int, mode: int):
 	
 func modify_zoom(id: int, mode: int):
 	const name = "ZOOM SPLIT"
+	
 	match mode:
 		SPLIT:
 			target.set_zoom(Vector2(target.default_zoom / 2, target.default_zoom / 2))
@@ -195,6 +199,7 @@ func modify_zoom(id: int, mode: int):
 
 func modify_resolution(id: int, mode: int):
 	const name = "WINDOW SPLIT"
+	
 	var curr_size = DisplayServer.window_get_size()
 	match mode:
 		SPLIT:
@@ -209,6 +214,7 @@ func modify_resolution(id: int, mode: int):
 
 func modify_map(id: int, mode: int):
 	const name = "WORLD SPLIT"
+	
 	match mode:
 		SPLIT:
 			GlobalInfo.arena.splitTheWorld()
@@ -219,6 +225,7 @@ func modify_map(id: int, mode: int):
 			
 func modify_player_health(id: int, mode: int):
 	const name = "HEALTH SPLIT"
+	
 	match mode:
 		SPLIT:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health / 2)
