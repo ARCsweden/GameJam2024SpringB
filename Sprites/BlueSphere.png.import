@@ -2,18 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://cqlam6035e0th"
-
-path="res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"
+uid="uid://dxoge4oyqlfd"
+path="res://.godot/imported/BlueSphere.png-859236fa61ed4284f585f4c23fc0f004.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/MrOne.png"
-dest_files=["res://.godot/imported/MrOne.png-2cadd786dbf10a76ab86bab9342d9b2b.ctex"]
+source_file="res://Sprites/BlueSphere.png"
+dest_files=["res://.godot/imported/BlueSphere.png-859236fa61ed4284f585f4c23fc0f004.ctex"]
 
 [params]
 

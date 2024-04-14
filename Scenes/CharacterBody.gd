@@ -5,7 +5,7 @@ signal hit;
 # Health
 @export var default_max_health = 1000
 var max_health = default_max_health
-var current_health = default_max_health
+@export var current_health = default_max_health
 
 # Movement and Dodge Properties
 
@@ -16,9 +16,13 @@ var current_health = default_max_health
 @export var default_dodge_duration = 0.2
 @export var default_dodge_cooldown = 1
 
-var friction = default_friction
-var acceleration = default_acceleration
-var speed = default_speed
+
+var default_zoom := 4
+
+@export var friction = default_friction
+@export var acceleration = default_acceleration
+@export var speed = default_speed
+
 var dodge_speed = default_dodge_speed
 
 var dodging = false
@@ -52,6 +56,8 @@ func _process(_delta):
 
 
 func _physics_process(delta):
+	
+	
 	if Input.is_action_just_pressed("attack"):
 		$Sword.swing()
 
@@ -67,12 +73,15 @@ func _physics_process(delta):
 		velocity = velocity.lerp(axis, friction)
 	else:
 		velocity = velocity.lerp(axis, acceleration)
-
+	
 	move_and_slide()
 
 # Function to start dodging
 func start_dodge():
 	modulate="ffffff50"
+	set_collision_layer_value(2,false)
+	set_collision_mask_value(3,false)
+	set_collision_mask_value(10,false)
 	dodging = true
 	can_dodge = false
 	get_node("DodgeTimer").start()  # Start the dodge duration timer
@@ -81,6 +90,9 @@ func start_dodge():
 # Function to end dodging
 func _end_dodge():
 	modulate="ffffff"
+	set_collision_layer_value(2,true)
+	set_collision_mask_value(3,true)
+	set_collision_mask_value(10,true)
 	dodging = false
 
 # Function to reset dodge availability
@@ -89,3 +101,9 @@ func _reset_dodge():
 	
 func set_speed(new_speed: int):
 	speed = new_speed
+	
+func set_zoom(new_zoom : Vector2):
+	$Camera2D.zoom = new_zoom
+	
+func set_health(new_health: int):
+	current_health = new_health
