@@ -18,7 +18,7 @@ var current_x_direction
 var current_y_direction
 
 # modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map, 
-var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
+var attack_functions = [modify_fps, modify_player_speed, modify_zoom, modify_player_health, modify_map]
 
 enum {SPLIT, RESTORE}
 
@@ -59,7 +59,7 @@ func _process(_delta):
 		turbo = true
 		
 	if turbo:
-		$SpecialAttackTimer.wait_time = 2
+		$SpecialAttackTimer.wait_time = 3
 		
 	if GlobalInfo.player == null:
 		queue_free()
