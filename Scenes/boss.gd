@@ -59,7 +59,7 @@ func _process(_delta):
 		turbo = true
 		
 	if turbo:
-		$SpecialAttackTimer.wait_time = 3
+		$SpecialAttackTimer.wait_time = 2
 		
 	if GlobalInfo.player == null:
 		queue_free()
