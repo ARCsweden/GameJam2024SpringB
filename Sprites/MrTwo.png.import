@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwjosqc1nia56"
-path="res://.godot/imported/PlayerBar.png-d65f8432e62e5d532db894bd6b4b5322.ctex"
+uid="uid://m4tb3pv5ameg"
+path="res://.godot/imported/MrTwo.png-8f843d49227e402b2b975cb3e322b6ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/PlayerBar.png"
-dest_files=["res://.godot/imported/PlayerBar.png-d65f8432e62e5d532db894bd6b4b5322.ctex"]
+source_file="res://Sprites/MrTwo.png"
+dest_files=["res://.godot/imported/MrTwo.png-8f843d49227e402b2b975cb3e322b6ae.ctex"]
 
 [params]
 

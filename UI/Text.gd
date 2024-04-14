@@ -39,5 +39,6 @@ func _on_timeout_timeout():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GlobalInfo.Boss_Dialog = self
 	boss_dialog.visible = false
 	pass
