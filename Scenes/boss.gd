@@ -7,7 +7,8 @@ signal delete_me
 
 @onready var dialogue = %Dialogue
 
-var health := 10000
+@export var max_health := 5000
+var health
 
 var active_timers = []
 
@@ -30,15 +31,17 @@ var target
 var id = 0
 
 var state := 0
-enum BossStates{idle, melee_attack, special_attack, talking}
+enum BossStates{idle, melee_attack, special_attack, talking, die}
 var is_in_melee_area := false
 
+var turbo = false
 
 var Boss_Bar = GlobalInfo.Boss_Bar
 
 
 
 func _ready():
+	health = max_health
 	GlobalInfo.boss = self
 	display_size = DisplayServer.window_get_size()
 	target = GlobalInfo.player
@@ -52,6 +55,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	
+	if health < (max_health / 2):
+		turbo = true
+		
+	if turbo:
+		$SpecialAttackTimer.wait_time = 5
 	if GlobalInfo.player == null:
 		queue_free()
 	if $MeleeAttackTimer.time_left > 0:
@@ -68,6 +76,8 @@ func _process(_delta):
 			$BossSprite.play("special_attack")
 		BossStates.talking:
 			$BossSprite.play("talking")
+		BossStates.die:
+			$BossSprite.play("die")
 			
 	
 	var index = 0
@@ -88,6 +98,7 @@ func special_attack():
 	
 	var debuff_duration_timer = Timer.new()
 	add_child(debuff_duration_timer)
+
 	debuff_duration_timer.wait_time = 15
 	debuff_duration_timer.one_shot = true
 	
@@ -97,6 +108,7 @@ func special_attack():
 	debuff_duration_timer.connect("timeout", current_attack.bind(id, RESTORE))
 	debuff_duration_timer.start()
 	active_timers.append(debuff_duration_timer)
+	
 	
 func set_direction(temp: int, direction: int):
 	
@@ -135,7 +147,7 @@ func choose_movement_action(action : String):
 			set_direction(axis.x, directions.NEGATIVE)
 	
 func take_damage(damage_taken: int):
-	if health - damage_taken == 0:
+	if health - damage_taken <= 0:
 		health = 0
 		die()
 	else:
@@ -144,10 +156,16 @@ func take_damage(damage_taken: int):
 	GlobalInfo.Boss_Bar.attrib = health
 	
 func die():
-	queue_free()
+	GlobalInfo.ui.mission_accomplished()
+	await get_tree().create_timer(5.0).timeout
+	get_tree().reload_current_scene()
+	#state = BossStates.die
+	#$DieTimer.start()
+
 
 func ranged_attack():
 	var active_projectile = projectile.instantiate()
+	GlobalInfo.Boss_Dialog.dialog = "I perfom my speciall move, SPLIT IN TWO"
 	add_child(active_projectile)
 	
 func _on_attack_timer_timeout():
@@ -170,6 +188,7 @@ func modify_fps(id: int, mode: int):
 
 func modify_player_speed(id: int, mode: int):
 	const name = "SPEED SPLIT"
+	
 	match mode:
 		SPLIT:
 			target.set_speed(target.speed / 2)
@@ -182,6 +201,7 @@ func modify_player_speed(id: int, mode: int):
 	
 func modify_zoom(id: int, mode: int):
 	const name = "ZOOM SPLIT"
+	
 	match mode:
 		SPLIT:
 			target.set_zoom(Vector2(target.default_zoom / 2, target.default_zoom / 2))
@@ -195,6 +215,7 @@ func modify_zoom(id: int, mode: int):
 
 func modify_resolution(id: int, mode: int):
 	const name = "WINDOW SPLIT"
+	
 	var curr_size = DisplayServer.window_get_size()
 	match mode:
 		SPLIT:
@@ -209,6 +230,7 @@ func modify_resolution(id: int, mode: int):
 
 func modify_map(id: int, mode: int):
 	const name = "WORLD SPLIT"
+	
 	match mode:
 		SPLIT:
 			GlobalInfo.arena.splitTheWorld()
@@ -219,6 +241,7 @@ func modify_map(id: int, mode: int):
 			
 func modify_player_health(id: int, mode: int):
 	const name = "HEALTH SPLIT"
+	
 	match mode:
 		SPLIT:
 			GlobalInfo.player.set_health(GlobalInfo.player.current_health / 2)
@@ -252,3 +275,8 @@ func _on_melee_area_body_exited(body):
 func _on_chill_timer_timeout():
 	$MeleeAttackTimer.start()
 	$MeleeSound.play()
+
+
+func _on_die_timer_timeout():
+	queue_free()
+

@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=28 format=3 uid="uid://djabf0tk6oft4"]
+
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
@@ -147,6 +149,7 @@ height = 136.0
 collision_layer = 2
 collision_mask = 527
 script = ExtResource("1_avkas")
+attack_dmg = 10000
 
 [node name="Bars" parent="CharacterBody2D" instance=ExtResource("4_x6wiy")]
 offset_left = -40.0

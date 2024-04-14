@@ -45,7 +45,7 @@ enum PlayerState{idle,walkingL,walkingR,attacking}
 var currentState = PlayerState.idle
 
 var can_attack = true
-
+@export var attack_dmg = 100
 
 func _ready():
 	
@@ -166,6 +166,8 @@ func game_over():
 	if !game_is_over:
 		game_is_over = true
 		GlobalInfo.ui.game_over()
+		await get_tree().create_timer(5.0).timeout
+		get_tree().reload_current_scene()
 	
 func start_attack():
 	currentState=PlayerState.attacking
@@ -183,8 +185,12 @@ func _end_attack():
 	hp.value = current_health
 	
 func take_damage(damage_taken: int):
+
 	$HurtSound.play()
-	if current_health - damage_taken == 0:
+
+
+	if current_health - damage_taken <= 0:
+
 		current_health = 0
 		game_over()
 	else:
@@ -196,4 +202,4 @@ func die():
 
 func _on_attack_hit_reg_body_entered(body):
 	$AttackHitSound.play()
-	GlobalInfo.boss.take_damage(100)
+	GlobalInfo.boss.take_damage(attack_dmg)
