@@ -93,6 +93,7 @@ func _physics_process(delta):
 # Function to start dodging
 func start_dodge():
 	modulate="ffffff50"
+	$DodgeSound.play()
 	set_collision_layer_value(2,false)
 	set_collision_mask_value(3,false)
 	set_collision_mask_value(10,false)
@@ -126,3 +127,14 @@ func set_zoom(new_zoom : Vector2):
 func set_health(new_health: int):
 	current_health = new_health
 	hp.value = current_health
+	
+func take_damage(damage_taken: int):
+	if current_health - damage_taken == 0:
+		current_health = 0
+		die()
+	else:
+		current_health -= damage_taken
+  hp.value = current_health
+	
+func die():
+	queue_free()
