@@ -59,7 +59,8 @@ func _process(_delta):
 		turbo = true
 		
 	if turbo:
-		$SpecialAttackTimer.wait_time = 5
+		$SpecialAttackTimer.wait_time = 3
+		
 	if GlobalInfo.player == null:
 		queue_free()
 	if $MeleeAttackTimer.time_left > 0:
@@ -158,7 +159,7 @@ func take_damage(damage_taken: int):
 func die():
 	GlobalInfo.ui.mission_accomplished()
 	await get_tree().create_timer(5.0).timeout
-	get_tree().reload_current_scene()
+	get_tree().quit()
 	#state = BossStates.die
 	$DieTimer.start()
 
@@ -178,7 +179,7 @@ func modify_fps(id: int, mode: int):
 	
 	match mode:
 		SPLIT:
-			Engine.max_fps = normal_fps / 2
+			Engine.max_fps = Engine.get_frames_per_second() / 2
 			print("Splitting FPS")
 			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:
