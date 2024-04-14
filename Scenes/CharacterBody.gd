@@ -183,6 +183,7 @@ func _end_attack():
 	hp.value = current_health
 	
 func take_damage(damage_taken: int):
+	$HurtSound.play()
 	if current_health - damage_taken == 0:
 		current_health = 0
 		game_over()

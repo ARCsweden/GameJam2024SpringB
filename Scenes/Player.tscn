@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djabf0tk6oft4"]
+[gd_scene load_steps=28 format=3 uid="uid://djabf0tk6oft4"]
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dmoi3di3robg4" path="res://Scenes/debug.tscn" id="6_ycbup"]
 [ext_resource type="AudioStream" uid="uid://cc8xtkslyivog" path="res://SFX/swingwav.wav" id="7_cd3en"]
 [ext_resource type="AudioStream" uid="uid://c07paqencwlid" path="res://SFX/Swooosh.wav" id="8_nwxsi"]
+[ext_resource type="AudioStream" uid="uid://peoswkm4ht3s" path="res://SFX/GetHurt.wav" id="8_ox56q"]
 [ext_resource type="AudioStream" uid="uid://bp5o12a84oaa4" path="res://SFX/hitSound.wav" id="8_x1xsp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
@@ -197,6 +198,9 @@ volume_db = -10.0
 [node name="AttackHitSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
 stream = ExtResource("8_x1xsp")
 volume_db = 5.0
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("8_ox56q")
 
 [node name="Debug" parent="." instance=ExtResource("6_ycbup")]
 layer = 20
