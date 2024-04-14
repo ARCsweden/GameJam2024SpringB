@@ -41,4 +41,8 @@ func _on_timeout_timeout():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	dialog = "Det här är ett intro för spelet, Den inehåller story motivationer och är otroligt spännande. Faktiska spelet startar 10 sec efter det här är klart.........................................."
+	dialog = "KIM wanted to be a karate master - but could not split wood.
+Ridiculed, KIM vowed to one day split ANYTHING.
+
+Having mastered SPLITTING KIM proved their power by SPLITTING A MARRIAGE IN TWO.
+The now divorced HUSBAND canceled his round of golf to exact his revenge...!"
