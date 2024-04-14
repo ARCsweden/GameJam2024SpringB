@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0j4kwaa24icu"]
+
+[ext_resource type="Script" path="res://StartDialog.gd" id="1_ckv6u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pygt3"]
+bg_color = Color(0, 0, 0, 0.196078)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="Intro" type="CanvasLayer"]
+
+[node name="StartDialog" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 337.0
+offset_top = 69.0
+offset_right = -350.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_pygt3")
+text = "intro"
+scroll_active = false
+scroll_following = true
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("1_ckv6u")
+
+[node name="TimerCharacter" type="Timer" parent="StartDialog"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Timeout" type="Timer" parent="StartDialog"]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="StartDialog/TimerCharacter" to="StartDialog" method="_on_timer_timeout"]
+[connection signal="timeout" from="StartDialog/Timeout" to="StartDialog" method="_on_timeout_timeout"]
