@@ -1,10 +1,12 @@
+
 [gd_scene load_steps=21 format=3 uid="uid://djabf0tk6oft4"]
+
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
 [ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
-[ext_resource type="PackedScene" uid="uid://86r3gwidpktu" path="res://Scenes/Bars.tscn" id="4_x6wiy"]
-[ext_resource type="PackedScene" uid="uid://dmoi3di3robg4" path="res://Scenes/debug.tscn" id="6_ycbup"]
+[ext_resource type="PackedScene" path="res://Scenes/Bars.tscn" id="4_x6wiy"]
+[ext_resource type="PackedScene" path="res://Scenes/debug.tscn" id="6_ycbup"]
 [ext_resource type="AudioStream" uid="uid://c07paqencwlid" path="res://SFX/Swooosh.wav" id="8_nwxsi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_luhud"]
@@ -113,6 +115,12 @@ collision_layer = 2
 collision_mask = 527
 script = ExtResource("1_avkas")
 
+[node name="Bars" parent="CharacterBody2D" instance=ExtResource("4_x6wiy")]
+offset_left = -40.0
+offset_top = -74.0
+offset_right = -40.0
+offset_bottom = -74.0
+
 [node name="Animations" type="AnimatedSprite2D" parent="CharacterBody2D"]
 material = SubResource("CanvasItemMaterial_luhud")
 position = Vector2(5, -3)
@@ -120,12 +128,6 @@ scale = Vector2(1, 1.238)
 sprite_frames = SubResource("SpriteFrames_aa384")
 animation = &"walk"
 script = ExtResource("3_rurco")
-
-[node name="Bars" parent="CharacterBody2D" instance=ExtResource("4_x6wiy")]
-offset_left = -40.0
-offset_top = -73.0
-offset_right = -40.0
-offset_bottom = -73.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-8, 0)

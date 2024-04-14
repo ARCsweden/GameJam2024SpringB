@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://86r3gwidpktu"]
+[gd_scene load_steps=10 format=3 uid="uid://86r3gwidpktu"]
 
 [ext_resource type="Script" path="res://UI/Bar.gd" id="1_srknb"]
 [ext_resource type="Texture2D" uid="uid://b0bgceuelxf0v" path="res://Sprites/PlayerBar.png" id="2_3ykvg"]
-[ext_resource type="Script" path="res://UI/Test.gd" id="3_bo11d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mutpi"]
 atlas = ExtResource("2_3ykvg")
@@ -40,8 +39,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Value" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
+[node name="HP" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 48.0
@@ -52,7 +50,7 @@ texture_progress = SubResource("AtlasTexture_ppsoq")
 texture_progress_offset = Vector2(0, 11)
 script = ExtResource("1_srknb")
 
-[node name="Damage" type="TextureProgressBar" parent="Value"]
+[node name="Damage" type="TextureProgressBar" parent="HP"]
 show_behind_parent = true
 layout_mode = 0
 offset_right = 16.0
@@ -64,16 +62,16 @@ texture_progress = SubResource("AtlasTexture_22ji1")
 texture_progress_offset = Vector2(0, 11)
 tint_under = Color(1, 1, 1, 0.392157)
 
-[node name="Timer" type="Timer" parent="Value"]
+[node name="Timer" type="Timer" parent="HP"]
 one_shot = true
 
-[node name="Value2" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
+[node name="Energy" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = 65.0
 offset_right = 81.0
 offset_bottom = 48.0
 scale = Vector2(-1, 1)
+step = 0.001
 value = 50.0
 fill_mode = 3
 texture_over = SubResource("AtlasTexture_ua71q")
@@ -81,7 +79,7 @@ texture_progress = SubResource("AtlasTexture_y8vof")
 texture_progress_offset = Vector2(0, 11)
 script = ExtResource("1_srknb")
 
-[node name="Damage" type="TextureProgressBar" parent="Value2"]
+[node name="Damage" type="TextureProgressBar" parent="Energy"]
 show_behind_parent = true
 layout_mode = 0
 offset_right = 16.0
@@ -93,18 +91,8 @@ texture_progress = SubResource("AtlasTexture_danex")
 texture_progress_offset = Vector2(0, 11)
 tint_under = Color(1, 1, 1, 0.392157)
 
-[node name="Timer" type="Timer" parent="Value2"]
+[node name="Timer" type="Timer" parent="Energy"]
 one_shot = true
 
-[node name="HSlider" type="HSlider" parent="."]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 110.0
-offset_right = 104.0
-offset_bottom = 126.0
-script = ExtResource("3_bo11d")
-
-[connection signal="timeout" from="Value/Timer" to="Value" method="_on_timer_timeout"]
-[connection signal="timeout" from="Value2/Timer" to="Value2" method="_on_timer_timeout"]
-[connection signal="changed" from="HSlider" to="HSlider" method="_on_changed"]
-[connection signal="value_changed" from="HSlider" to="HSlider" method="_on_value_changed"]
+[connection signal="timeout" from="HP/Timer" to="HP" method="_on_timer_timeout"]
+[connection signal="timeout" from="Energy/Timer" to="Energy" method="_on_timer_timeout"]
