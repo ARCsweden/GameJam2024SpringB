@@ -165,7 +165,7 @@ func die():
 
 func ranged_attack():
 	var active_projectile = projectile.instantiate()
-	GlobalInfo.Boss_Dialog.dialog = "I perfom my speciall move, SPLIT IN TWO"
+	GlobalInfo.Boss_Dialog.dialog = "I perform my special move, SPLIT IN TWO!"
 	add_child(active_projectile)
 	
 func _on_attack_timer_timeout():

@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://gwj8gnrvc0vy" path="res://Fonts/PeaberryBase.ttf" id="2_7wq6l"]
 
 [sub_resource type="SystemFont" id="SystemFont_oe0qo"]
+subpixel_positioning = 0
 msdf_size = 30
 
 [sub_resource type="Animation" id="Animation_232yh"]
@@ -115,7 +116,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="GameOverText" type="Label" parent="Ui/GameOver"]
 visible = false

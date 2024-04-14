@@ -146,7 +146,6 @@ height = 136.0
 collision_layer = 2
 collision_mask = 527
 script = ExtResource("1_avkas")
-attack_dmg = 10000
 
 [node name="Bars" parent="CharacterBody2D" instance=ExtResource("4_x6wiy")]
 offset_left = -40.0
@@ -203,6 +202,7 @@ volume_db = 5.0
 layer = 20
 path_to_node = NodePath("../CharacterBody2D")
 properties = ["current_health", "velocity", "speed", "acceleration", "friction"]
+enabled = false
 
 [connection signal="area_entered" from="CharacterBody2D/AttackHitReg" to="CharacterBody2D" method="_on_attack_hit_reg_area_entered"]
 [connection signal="body_entered" from="CharacterBody2D/AttackHitReg" to="CharacterBody2D" method="_on_attack_hit_reg_body_entered"]
