@@ -17,6 +17,11 @@ func _physics_process(delta):
 	global_position += proj_vect.normalized() * speed * delta
 	count += count;
 func _on_area_2d_body_entered(body):
+	
 	GlobalInfo.boss.special_attack()
-	queue_free()
+	$HitSound.play()
 
+
+
+func _on_audio_stream_player_finished():
+	queue_free()
