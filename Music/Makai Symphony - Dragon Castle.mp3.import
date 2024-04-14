@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4h5q0mi4j8ol"
+path="res://.godot/imported/Makai Symphony - Dragon Castle.mp3-ae097f0a0166864aad57abba3c3e1f21.mp3str"
+
+[deps]
+
+source_file="res://Music/Makai Symphony - Dragon Castle.mp3"
+dest_files=["res://.godot/imported/Makai Symphony - Dragon Castle.mp3-ae097f0a0166864aad57abba3c3e1f21.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
