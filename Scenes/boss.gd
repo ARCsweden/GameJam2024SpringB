@@ -7,7 +7,8 @@ signal delete_me
 
 @onready var dialogue = %Dialogue
 
-var health := 10000
+@export var max_health := 5000
+var health
 
 var active_timers = []
 
@@ -30,15 +31,17 @@ var target
 var id = 0
 
 var state := 0
-enum BossStates{idle, melee_attack, special_attack, talking}
+enum BossStates{idle, melee_attack, special_attack, talking, die}
 var is_in_melee_area := false
 
+var turbo = false
 
 var Boss_Bar = GlobalInfo.Boss_Bar
 
 
 
 func _ready():
+	health = max_health
 	GlobalInfo.boss = self
 	display_size = DisplayServer.window_get_size()
 	target = GlobalInfo.player
@@ -52,6 +55,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	
+	if health < (max_health / 2):
+		turbo = true
+		
+	if turbo:
+		$SpecialAttackTimer.wait_time = 5
 	if GlobalInfo.player == null:
 		queue_free()
 	if $MeleeAttackTimer.time_left > 0:
@@ -68,6 +76,8 @@ func _process(_delta):
 			$BossSprite.play("special_attack")
 		BossStates.talking:
 			$BossSprite.play("talking")
+		BossStates.die:
+			$BossSprite.play("die")
 			
 	
 	var index = 0
@@ -88,6 +98,7 @@ func special_attack():
 	
 	var debuff_duration_timer = Timer.new()
 	add_child(debuff_duration_timer)
+
 	debuff_duration_timer.wait_time = 15
 	debuff_duration_timer.one_shot = true
 	
@@ -135,7 +146,7 @@ func choose_movement_action(action : String):
 			set_direction(axis.x, directions.NEGATIVE)
 	
 func take_damage(damage_taken: int):
-	if health - damage_taken == 0:
+	if health - damage_taken <= 0:
 		health = 0
 		die()
 	else:
@@ -144,7 +155,8 @@ func take_damage(damage_taken: int):
 	GlobalInfo.Boss_Bar.attrib = health
 	
 func die():
-	queue_free()
+	state = BossStates.die
+	$DieTimer.start()
 
 func ranged_attack():
 	var active_projectile = projectile.instantiate()
@@ -249,3 +261,7 @@ func _on_melee_area_body_exited(body):
 
 func _on_chill_timer_timeout():
 	$MeleeAttackTimer.start()
+
+
+func _on_die_timer_timeout():
+	queue_free()
