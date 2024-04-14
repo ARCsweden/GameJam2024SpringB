@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bd6e3fjuy7b24"]
 
 [ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
-[ext_resource type="Texture2D" uid="uid://m4tb3pv5ameg" path="res://Sprites/MrTwo.png" id="2_7feg0"]
+[ext_resource type="Texture2D" path="res://Sprites/MrTwo.png" id="2_7feg0"]
 [ext_resource type="FontFile" uid="uid://gwj8gnrvc0vy" path="res://Fonts/PeaberryBase.ttf" id="3_rbw6q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2as40"]
