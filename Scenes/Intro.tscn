@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://6taeteq785e0"]
+
+[gd_scene load_steps=13 format=3 uid="uid://b0j4kwaa24icu"]
+
 
 [ext_resource type="Script" path="res://StartDialog.gd" id="1_ckv6u"]
+[ext_resource type="Texture2D" uid="uid://xsrl541dfx2p" path="res://Sprites/SplitFail.png" id="2_sudk2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pygt3"]
 bg_color = Color(0, 0, 0, 0.196078)
@@ -8,6 +11,70 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sap12"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(0, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxbey"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(112, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2dat"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(224, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o36j0"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(336, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46ywc"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(448, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orbpa"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(560, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq08o"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(672, 0, 112, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itcff"]
+atlas = ExtResource("2_sudk2")
+region = Rect2(784, 0, 112, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lh6ta"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sap12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxbey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2dat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o36j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46ywc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orbpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq08o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itcff")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
 
 [node name="Intro" type="CanvasLayer"]
 
@@ -17,12 +84,13 @@ z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 337.0
+offset_left = 965.0
 offset_top = 69.0
-offset_right = -350.0
+offset_right = -54.0
 offset_bottom = -83.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 96
 theme_override_styles/normal = SubResource("StyleBoxFlat_pygt3")
 text = "intro"
 scroll_active = false
@@ -38,6 +106,12 @@ one_shot = true
 [node name="Timeout" type="Timer" parent="StartDialog"]
 wait_time = 5.0
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(481, 542)
+scale = Vector2(6.92857, 5.31875)
+sprite_frames = SubResource("SpriteFrames_lh6ta")
+autoplay = "default"
 
 [connection signal="timeout" from="StartDialog/TimerCharacter" to="StartDialog" method="_on_timer_timeout"]
 [connection signal="timeout" from="StartDialog/Timeout" to="StartDialog" method="_on_timeout_timeout"]
