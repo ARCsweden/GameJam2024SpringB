@@ -26,6 +26,10 @@ var state := 0
 enum BossStates{idle, melee_attack, special_attack, talking}
 var is_in_melee_area := false
 
+
+var Boss_Bar = GlobalInfo.Boss_Bar
+
+
 func _ready():
 	GlobalInfo.boss = self
 	display_size = DisplayServer.window_get_size()
@@ -35,8 +39,13 @@ func _ready():
 	Engine.max_fps = 30
 	connect("delete_me",cleanup)
 	
+	GlobalInfo.Boss_Bar.attrib_max = health
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	
+	if GlobalInfo.player == null:
+		queue_free()
 	if $MeleeAttackTimer.time_left > 0:
 		state = BossStates.melee_attack
 	else:
@@ -123,6 +132,8 @@ func take_damage(damage_taken: int):
 		die()
 	else:
 		health -= damage_taken
+		
+	GlobalInfo.Boss_Bar.attrib = health
 	
 func die():
 	queue_free()
@@ -211,9 +222,13 @@ func _on_melee_area_body_entered(body):
 func _on_melee_attack_timer_timeout():
 	$MeleeAttackTimer.stop()
 	if is_in_melee_area == true:
+		$ChillTimer.start()
 		melee_attack()
-
 
 func _on_melee_area_body_exited(body):
 	is_in_melee_area = false
 	
+
+
+func _on_chill_timer_timeout():
+	$MeleeAttackTimer.start()

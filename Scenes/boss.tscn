@@ -154,7 +154,11 @@ position = Vector2(0, -32)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jmy05")
 
+[node name="ChillTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="SpecialAttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="MeleeAttackTimer" to="." method="_on_melee_attack_timer_timeout"]
 [connection signal="body_entered" from="MeleeArea" to="." method="_on_melee_area_body_entered"]
 [connection signal="body_exited" from="MeleeArea" to="." method="_on_melee_area_body_exited"]
+[connection signal="timeout" from="ChillTimer" to="." method="_on_chill_timer_timeout"]

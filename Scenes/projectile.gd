@@ -24,7 +24,7 @@ func _on_area_2d_body_entered(body):
 	
 func _on_animation_player_animation_finished(_anim_name):
 	GlobalInfo.boss.special_attack()
-	$Hitsound.play()
+	$HitSound.play()
 
 func _on_audio_stream_player_finished():
 	queue_free()
