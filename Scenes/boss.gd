@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
 signal delete_me
-@export var move_speed := 100
+@export var move_speed := 50
 
-@onready var attack_timer = %AttackTimer
 @onready var dialogue = %Dialogue
 
 var health := 10000
@@ -23,6 +22,9 @@ enum axis{x,y}
 var movement = ["up", "down", "left", "right", "up_right", "up_left", "down_right", "down_left"]
 var display_size
 var target
+var state := 0
+enum BossStates{idle, melee_attack, special_attack, talking}
+var is_in_melee_area := false
 
 func _ready():
 	GlobalInfo.boss = self
@@ -35,6 +37,18 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	
+	match state:
+		BossStates.idle:
+			$BossSprite.play("idle")
+		BossStates.melee_attack:
+			$BossSprite.play("melee_attack")
+		BossStates.special_attack:
+			$BossSprite.play("special_attack")
+		BossStates.talking:
+			$BossSprite.play("talking")
+			
+	
 	var index = 0
 	for timer in active_timers:
 		if timer != null:
@@ -52,7 +66,7 @@ func special_attack():
 	
 	var debuff_duration_timer = Timer.new()
 	add_child(debuff_duration_timer)
-	debuff_duration_timer.wait_time = 5
+	debuff_duration_timer.wait_time = 15
 	debuff_duration_timer.one_shot = true
 	
 	var	current_attack = attack_functions.pick_random()
@@ -186,13 +200,16 @@ func melee_attack():
 	pass
 
 func _on_melee_area_body_entered(body):
+	is_in_melee_area = true
 	melee_attack()
 	$MeleeAttackTimer.start()
 	
 
 func _on_melee_attack_timer_timeout():
-	melee_attack()
+	if is_in_melee_area == true:
+		melee_attack()
 
 
 func _on_melee_area_body_exited(body):
-	pass # Replace with function body.
+	is_in_melee_area = false
+	$MeleeAttackTimer.stop()

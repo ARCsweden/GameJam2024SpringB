@@ -86,6 +86,7 @@ _data = {
 }
 
 [node name="Projectile" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_asnnf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
