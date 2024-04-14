@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=28 format=3 uid="uid://djabf0tk6oft4"]
-
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]

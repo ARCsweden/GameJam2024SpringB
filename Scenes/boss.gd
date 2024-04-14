@@ -160,7 +160,7 @@ func die():
 	await get_tree().create_timer(5.0).timeout
 	get_tree().reload_current_scene()
 	#state = BossStates.die
-	#$DieTimer.start()
+	$DieTimer.start()
 
 
 func ranged_attack():

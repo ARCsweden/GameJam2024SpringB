@@ -38,6 +38,7 @@ func game_over():
 	
 func mission_accomplished():
 	MissionAccomplishedAnim.play("win_anim")
+	
 
 func _on_game_over_animation_animation_finished(anim_name):
 	if anim_name == "fade_to_black":
@@ -45,4 +46,5 @@ func _on_game_over_animation_animation_finished(anim_name):
 
 
 func _on_mission_accomplished_animation_animation_finished(anim_name):
+	$YES.play()
 	pass
