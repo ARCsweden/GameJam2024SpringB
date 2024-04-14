@@ -1,7 +1,10 @@
+
 [gd_scene load_steps=13 format=3 uid="uid://1gqn25rqj46k"]
+
 
 [ext_resource type="Texture2D" uid="uid://dxoge4oyqlfd" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
 [ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_asnnf"]
+[ext_resource type="AudioStream" uid="uid://c0d42k1okhw4b" path="res://SFX/SpHit.wav" id="3_h2hag"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1h4g4"]
 atlas = ExtResource("1_6yldy")
@@ -103,6 +106,7 @@ collision_mask = 2
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_w5bt8")
 
+
 [node name="Hitsound" type="AudioStreamPlayer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -113,3 +117,11 @@ libraries = {
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h2hag")
+volume_db = -15.0
+pitch_scale = 0.8
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="finished" from="HitSound" to="." method="_on_audio_stream_player_finished"]

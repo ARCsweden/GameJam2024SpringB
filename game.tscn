@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc1sjffrk83dv"]
 
-[ext_resource type="PackedScene" uid="uid://skgu0onttq34" path="res://Scenes/Player.tscn" id="2_mafh7"]
+[ext_resource type="PackedScene" uid="uid://djabf0tk6oft4" path="res://Scenes/Player.tscn" id="2_mafh7"]
 [ext_resource type="PackedScene" uid="uid://bd6e3fjuy7b24" path="res://Scenes/boss.tscn" id="3_7y1nh"]
-[ext_resource type="PackedScene" uid="uid://bom7ruxndjg2g" path="res://Scenes/ClosedArena.tscn" id="3_76ysh"]
+[ext_resource type="PackedScene" uid="uid://ce5d74ohrtqub" path="res://Scenes/ClosedArena.tscn" id="3_76ysh"]
 
 [node name="Game" type="Node2D"]
 
