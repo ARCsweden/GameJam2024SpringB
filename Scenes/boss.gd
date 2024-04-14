@@ -6,6 +6,8 @@ signal delete_me
 @onready var attack_timer = %AttackTimer
 @onready var dialogue = %Dialogue
 
+var health := 10000
+
 var active_timers = []
 
 var projectile = preload("res://Scenes/projectile.tscn")
@@ -40,13 +42,11 @@ func _process(_delta):
 				timer.queue_free()
 				active_timers.remove_at(index)
 		index += index
-func _physics_process(_delta):
+func _physics_process(delta):
 # Add the gravity.
-
-	#velocity.x = move_speed * current_x_direction
-	#velocity.y = move_speed * current_y_direction
 	
-	move_and_slide()
+	velocity = global_position.direction_to(GlobalInfo.player.global_position)
+	move_and_collide(velocity * move_speed * delta)
 	
 func special_attack():
 	
@@ -98,8 +98,15 @@ func choose_movement_action(action : String):
 			set_direction(axis.y, directions.NEGATIVE)
 			set_direction(axis.x, directions.NEGATIVE)
 	
-func _on_action_timer_timeout():
-	choose_movement_action(movement.pick_random())
+func take_damage(damage_taken: int):
+	if health - damage_taken == 0:
+		health = 0
+		die()
+	else:
+		health -= damage_taken
+	
+func die():
+	queue_free()
 
 func ranged_attack():
 	var active_projectile = projectile.instantiate()
@@ -175,3 +182,17 @@ func modify_resolution(mode: int):
 func cleanup(trash : Resource):
 	trash.queue_free()
 
+func melee_attack():
+	pass
+
+func _on_melee_area_body_entered(body):
+	melee_attack()
+	$MeleeAttackTimer.start()
+	
+
+func _on_melee_attack_timer_timeout():
+	melee_attack()
+
+
+func _on_melee_area_body_exited(body):
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd6e3fjuy7b24"]
+[gd_scene load_steps=8 format=3 uid="uid://bd6e3fjuy7b24"]
 
 [ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
 [ext_resource type="Texture2D" uid="uid://24o3lxr7mxmy" path="res://Art/GiantIdle.png" id="2_qg2r0"]
@@ -21,6 +21,8 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gb453"]
 size = Vector2(11, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5v1vk"]
 
 [node name="Boss" type="CharacterBody2D"]
 collision_layer = 4
@@ -79,5 +81,13 @@ autostart = true
 
 [node name="AttackDialogue" type="AudioStreamPlayer" parent="."]
 
+[node name="MeleeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
+position = Vector2(1, 6)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_5v1vk")
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
+[connection signal="body_entered" from="MeleeArea" to="." method="_on_melee_area_body_entered"]
