@@ -162,7 +162,7 @@ shape = SubResource("CapsuleShape2D_ims3m")
 
 [node name="SpecialAttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 7.0
+wait_time = 5.0
 autostart = true
 
 [node name="MeleeAttackTimer" type="Timer" parent="."]
