@@ -31,8 +31,21 @@ var dodge_cooldown = default_dodge_cooldown  # Cooldown duration in seconds
 var can_dodge = true      # Flag to check if dodge can be triggered
 var axis = Vector2.ZERO
 
+enum PlayerState{idle,walking,attacking}
+var currentState = PlayerState.idle
+
 func _ready():
 	
+	# Initialize Timer for attack state duration
+	GlobalInfo.player = self
+	var attack_timer = Timer.new()
+	attack_timer.name = "AttackTimer"
+	attack_timer.wait_time = 0.3
+	attack_timer.one_shot = true
+	add_child(attack_timer)
+	attack_timer.timeout.connect(_end_attack)
+	
+		
 	# Initialize Timer for dodge duration
 	GlobalInfo.player = self
 	var dodge_timer = Timer.new()
@@ -58,8 +71,10 @@ func _process(_delta):
 func _physics_process(delta):
 	
 	
+	
 	if Input.is_action_just_pressed("attack"):
-		$Sword.swing()
+		start_attack()
+		
 
 	if Input.is_action_just_pressed("dodge") and can_dodge:
 		start_dodge()
@@ -70,8 +85,14 @@ func _physics_process(delta):
 	axis = axis.normalized() * (dodge_speed if dodging else speed)
 
 	if axis == Vector2.ZERO:
+		if (currentState!=PlayerState.attacking):
+			currentState=PlayerState.idle
+			$Animations.idle()
 		velocity = velocity.lerp(axis, friction)
 	else:
+		if (currentState!=PlayerState.attacking):
+			currentState=PlayerState.walking
+			$Animations.walk()
 		velocity = velocity.lerp(axis, acceleration)
 	
 	move_and_slide()
@@ -108,3 +129,12 @@ func set_zoom(new_zoom : Vector2):
 	
 func set_health(new_health: int):
 	current_health = new_health
+	
+func start_attack():
+	currentState=PlayerState.attacking
+	get_node("AttackTimer").start()
+	$Animations.attack()
+	
+func _end_attack():
+	currentState=PlayerState.idle
+	
