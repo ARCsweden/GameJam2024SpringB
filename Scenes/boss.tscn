@@ -128,8 +128,8 @@ radius = 16.0
 height = 82.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmy05"]
-radius = 88.0
-height = 416.0
+radius = 140.0
+height = 456.0
 
 [node name="Boss" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
@@ -142,7 +142,7 @@ texture_filter = 1
 position = Vector2(0, -256)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_looa7")
-animation = &"die"
+animation = &"idle"
 
 [node name="Control" type="Control" parent="BossSprite"]
 layout_mode = 3
@@ -180,6 +180,7 @@ autowrap_mode = 3
 position = Vector2(12, -140)
 scale = Vector2(4, 4)
 shape = SubResource("CapsuleShape2D_ims3m")
+debug_color = Color(0.243137, 0.635294, 0, 0.419608)
 
 [node name="SpecialAttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -196,9 +197,10 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
-position = Vector2(0, -32)
+position = Vector2(0, -80)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jmy05")
+debug_color = Color(0.968627, 0.180392, 0, 0.419608)
 
 [node name="ChillTimer" type="Timer" parent="."]
 one_shot = true

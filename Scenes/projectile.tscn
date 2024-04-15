@@ -103,6 +103,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_w5bt8")
+debug_color = Color(0.913725, 0.294118, 0, 0.419608)
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_2uit3")
