@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://djabf0tk6oft4"]
+[gd_scene load_steps=31 format=3 uid="uid://djabf0tk6oft4"]
 
 [ext_resource type="Script" path="res://Scenes/CharacterBody.gd" id="1_avkas"]
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
@@ -27,6 +27,18 @@ region = Rect2(560, 0, 80, 106)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tehe"]
 atlas = ExtResource("2_a27we")
 region = Rect2(0, 0, 80, 106)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7gvt"]
+atlas = ExtResource("2_a27we")
+region = Rect2(640, 0, 80, 106)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fvgk"]
+atlas = ExtResource("2_a27we")
+region = Rect2(720, 0, 80, 106)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qw7n"]
+atlas = ExtResource("2_a27we")
+region = Rect2(800, 0, 80, 106)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kt68q"]
 atlas = ExtResource("2_a27we")
@@ -86,6 +98,26 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7gvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fvgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qw7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qw7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qw7n")
+}],
+"loop": true,
+"name": &"die",
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -159,7 +191,7 @@ material = SubResource("CanvasItemMaterial_luhud")
 position = Vector2(5, -3)
 scale = Vector2(1, 1.238)
 sprite_frames = SubResource("SpriteFrames_aa384")
-animation = &"walkL"
+animation = &"die"
 script = ExtResource("3_rurco")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
