@@ -18,8 +18,8 @@ var current_x_direction
 var current_y_direction
 
 
-#var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
-var attack_functions = [modify_resolution]
+var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
+#var attack_functions = [modify_resolution]
 
 enum {SPLIT, RESTORE}
 
