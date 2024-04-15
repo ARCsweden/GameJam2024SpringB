@@ -17,8 +17,8 @@ var projectile = preload("res://Scenes/projectile.tscn")
 var current_x_direction
 var current_y_direction
 
-# modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map, 
-var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
+var attack_functions = [modify_screen]
+#var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
 
 enum {SPLIT, RESTORE}
 
@@ -181,6 +181,11 @@ func ranged_attack():
 	
 func _on_attack_timer_timeout():
 		ranged_attack()
+		
+func modify_screen():
+	var second_window = Window.new()
+	#Stuff here
+	pass
 	
 func modify_fps(id: int, mode: int):
 	
