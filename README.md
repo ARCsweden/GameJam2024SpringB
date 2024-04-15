@@ -4,5 +4,5 @@ ARC Spring GameJam 2024 group B
 
 ## List of Known bugs and TODOs:
 
-- If the player dies with a smaller window size and the game restarts before it is restored the small window becomes the default size
-
+- If the player dies with a window split debuf and the game restarts before it is restored the smaller window becomes the new default size when you respawn
+- 
