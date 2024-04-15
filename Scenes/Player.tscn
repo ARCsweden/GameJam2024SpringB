@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cqlam6035e0th" path="res://Sprites/MrOne.png" id="2_a27we"]
 [ext_resource type="Script" path="res://Scenes/Animations.gd" id="3_rurco"]
 [ext_resource type="PackedScene" uid="uid://86r3gwidpktu" path="res://Scenes/Bars.tscn" id="4_x6wiy"]
-[ext_resource type="PackedScene" uid="uid://dmoi3di3robg4" path="res://Scenes/debug.tscn" id="6_ycbup"]
+[ext_resource type="PackedScene" path="res://Scenes/debug.tscn" id="6_ycbup"]
 [ext_resource type="AudioStream" uid="uid://cc8xtkslyivog" path="res://SFX/swingwav.wav" id="7_cd3en"]
 [ext_resource type="AudioStream" uid="uid://c07paqencwlid" path="res://SFX/Swooosh.wav" id="8_nwxsi"]
 [ext_resource type="AudioStream" uid="uid://peoswkm4ht3s" path="res://SFX/GetHurt.wav" id="8_ox56q"]
