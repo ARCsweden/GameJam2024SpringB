@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bd6e3fjuy7b24"]
 
 [ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
-[ext_resource type="Texture2D" uid="uid://m4tb3pv5ameg" path="res://Sprites/MrTwo.png" id="2_7feg0"]
+[ext_resource type="Texture2D" path="res://Sprites/MrTwo.png" id="2_7feg0"]
 [ext_resource type="FontFile" uid="uid://gwj8gnrvc0vy" path="res://Fonts/PeaberryBase.ttf" id="3_rbw6q"]
 [ext_resource type="AudioStream" uid="uid://bwqra162gckne" path="res://SFX/bossMelee.wav" id="4_b3qn6"]
 
@@ -180,6 +180,7 @@ autowrap_mode = 3
 position = Vector2(12, -140)
 scale = Vector2(4, 4)
 shape = SubResource("CapsuleShape2D_ims3m")
+debug_color = Color(0.243137, 0.635294, 0, 0.419608)
 
 [node name="SpecialAttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -199,6 +200,7 @@ collision_mask = 2
 position = Vector2(0, -32)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jmy05")
+debug_color = Color(0.968627, 0.180392, 0, 0.419608)
 
 [node name="ChillTimer" type="Timer" parent="."]
 one_shot = true
