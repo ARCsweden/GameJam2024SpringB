@@ -12,6 +12,7 @@ var max_health = default_max_health
 
 @onready var hp = $Bars/HP
 @onready var energy = $Bars/Energy
+@onready var SplitWindow: Window = $SpitWindow
 
 # Movement and Dodge Properties
 
@@ -211,3 +212,9 @@ func die():
 func _on_attack_hit_reg_body_entered(body):
 	$AttackHitSound.play()
 	GlobalInfo.boss.take_damage(attack_dmg)
+	
+func split_window(display_size,world):
+	$SplitWindow.split(display_size,world)
+	
+func fix_window():
+	$SplitWindow.fix()

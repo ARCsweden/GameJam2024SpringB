@@ -182,10 +182,24 @@ func ranged_attack():
 func _on_attack_timer_timeout():
 		ranged_attack()
 		
-func modify_screen():
-	var second_window = Window.new()
-	#Stuff here
-	pass
+func modify_screen(id: int, mode: int):
+	
+	
+	const name = "SCREEN SPLIT"
+	
+	
+	
+	
+	
+	match mode:
+		SPLIT:
+			DisplayServer.window_set_size(Vector2i(display_size.x / 2,display_size.y))
+			GlobalInfo.player.split_window(display_size,get_window().world_2d)
+		RESTORE:
+			GlobalInfo.player.fix_window()
+			DisplayServer.window_set_size(display_size)
+	
+	
 	
 func modify_fps(id: int, mode: int):
 	
