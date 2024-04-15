@@ -12,3 +12,6 @@ func attack():
 
 func idle():
 	play("idle")
+
+func die():
+	await play("die")

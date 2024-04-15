@@ -41,6 +41,7 @@ var Boss_Bar = GlobalInfo.Boss_Bar
 
 
 func _ready():
+	state = BossStates.idle
 	health = max_health
 	GlobalInfo.boss = self
 	display_size = DisplayServer.window_get_size()
@@ -63,10 +64,12 @@ func _process(_delta):
 		
 	if GlobalInfo.player == null:
 		queue_free()
-	if $MeleeAttackTimer.time_left > 0:
-		state = BossStates.melee_attack
-	else:
-		state = BossStates.idle
+		
+	if state != BossStates.die:
+		if $MeleeAttackTimer.time_left > 0:
+			state = BossStates.melee_attack
+		else:
+			state = BossStates.idle
 		
 	match state:
 		BossStates.idle:
@@ -89,8 +92,8 @@ func _process(_delta):
 				active_timers.remove_at(index)
 		index += index
 func _physics_process(delta):
-# Add the gravity.
-	if GlobalInfo.player != null:
+	
+	if GlobalInfo.player != null && state != BossStates.die:
 		velocity = global_position.direction_to(GlobalInfo.player.global_position)
 		move_and_collide(velocity * move_speed * delta)
 	
@@ -157,10 +160,17 @@ func take_damage(damage_taken: int):
 	GlobalInfo.Boss_Bar.attrib = health
 	
 func die():
+	#Play animation
+	state = BossStates.die
+	#Stop the attack
+	$SpecialAttackTimer.paused = true
+	#wait for animation to be done
+	await get_tree().create_timer(5.0).timeout
+	#fade to black
 	GlobalInfo.ui.mission_accomplished()
 	await get_tree().create_timer(5.0).timeout
 	get_tree().quit()
-	#state = BossStates.die
+	
 	$DieTimer.start()
 
 

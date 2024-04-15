@@ -41,7 +41,7 @@ var game_is_over = false
 
 var cooldown_timer
 
-enum PlayerState{idle,walkingL,walkingR,attacking}
+enum PlayerState{idle,walkingL,walkingR,attacking,dead}
 var currentState = PlayerState.idle
 
 var can_attack = true
@@ -80,6 +80,8 @@ func _ready():
 	hp.attrib_max = default_max_health
 	energy.attrib_max = dodge_cooldown
 	
+	can_attack = true
+	can_dodge = true
 
 
 func _process(_delta):
@@ -105,12 +107,12 @@ func _physics_process(delta):
 	axis = axis.normalized() * (dodge_speed if dodging else speed)
 
 	if axis == Vector2.ZERO:
-		if (currentState!=PlayerState.attacking):
+		if (currentState!=PlayerState.attacking && currentState != PlayerState.dead):
 			currentState=PlayerState.idle
 			$Animations.idle()
 		velocity = velocity.lerp(axis, friction)
 	else:
-		if (currentState!=PlayerState.attacking):
+		if (currentState!=PlayerState.attacking && currentState != PlayerState.dead):
 			if axis.x >= 0:
 				currentState=PlayerState.walkingR
 				$Animations.flip_h = false
@@ -122,7 +124,7 @@ func _physics_process(delta):
 			$Animations.walk()
 		velocity = velocity.lerp(axis, acceleration)
 	
-	move_and_slide()
+	if (currentState != PlayerState.dead): move_and_slide()
 
 # Function to start dodging
 func start_dodge():
@@ -165,8 +167,14 @@ func set_health(new_health: int):
 func game_over():
 	if !game_is_over:
 		game_is_over = true
+		currentState = PlayerState.dead
+		can_attack = false
+		can_dodge = false
+		$Animations.die()
+		await get_tree().create_timer(4.0).timeout
 		GlobalInfo.ui.game_over()
-		await get_tree().create_timer(5.0).timeout
+		await get_tree().create_timer(7.0).timeout
+		currentState = PlayerState.idle
 		get_tree().reload_current_scene()
 	
 func start_attack():
