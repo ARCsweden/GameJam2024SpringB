@@ -188,16 +188,15 @@ func modify_screen(id: int, mode: int):
 	const name = "SCREEN SPLIT"
 	
 	
-	
-	
-	
 	match mode:
 		SPLIT:
 			DisplayServer.window_set_size(Vector2i(display_size.x / 2,display_size.y))
+			DisplayServer.window_set_position(get_window().position + Vector2i(-10,0))
 			GlobalInfo.player.split_window(display_size,get_window().world_2d)
 		RESTORE:
 			GlobalInfo.player.fix_window()
 			DisplayServer.window_set_size(display_size)
+			DisplayServer.window_set_position(get_window().position + Vector2i(10,0))
 	
 	
 	
