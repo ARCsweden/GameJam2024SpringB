@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bd6e3fjuy7b24"]
 
 [ext_resource type="Script" path="res://Scenes/boss.gd" id="1_47lmp"]
-[ext_resource type="Texture2D" path="res://Sprites/MrTwo.png" id="2_7feg0"]
+[ext_resource type="Texture2D" uid="uid://m4tb3pv5ameg" path="res://Sprites/MrTwo.png" id="2_7feg0"]
 [ext_resource type="FontFile" uid="uid://gwj8gnrvc0vy" path="res://Fonts/PeaberryBase.ttf" id="3_rbw6q"]
 [ext_resource type="AudioStream" uid="uid://bwqra162gckne" path="res://SFX/bossMelee.wav" id="4_b3qn6"]
 
@@ -128,8 +128,8 @@ radius = 16.0
 height = 82.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmy05"]
-radius = 88.0
-height = 416.0
+radius = 140.0
+height = 456.0
 
 [node name="Boss" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
@@ -142,7 +142,7 @@ texture_filter = 1
 position = Vector2(0, -256)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_looa7")
-animation = &"die"
+animation = &"idle"
 
 [node name="Control" type="Control" parent="BossSprite"]
 layout_mode = 3
@@ -197,7 +197,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
-position = Vector2(0, -32)
+position = Vector2(0, -80)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jmy05")
 debug_color = Color(0.968627, 0.180392, 0, 0.419608)
