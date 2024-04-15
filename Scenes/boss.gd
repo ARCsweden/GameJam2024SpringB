@@ -17,8 +17,9 @@ var projectile = preload("res://Scenes/projectile.tscn")
 var current_x_direction
 var current_y_direction
 
-# modify_fps, modify_player_speed, modify_zoom, modify_window_size, modify_player_health, modify_map, 
-var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
+
+#var attack_functions = [modify_fps,modify_resolution, modify_player_speed, modify_zoom, modify_player_health, modify_map]
+var attack_functions = [modify_resolution]
 
 enum {SPLIT, RESTORE}
 
@@ -231,10 +232,12 @@ func modify_resolution(id: int, mode: int):
 	match mode:
 		SPLIT:
 			DisplayServer.window_set_size(curr_size / 2)
+			DisplayServer.window_set_position(    (DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size(DisplayServer.MAIN_WINDOW_ID) / 2)     )
 			print("Splitting Resolution")
 			GlobalInfo.ui.add_debuff(id, name)
 		RESTORE:			
-			DisplayServer.window_set_size(display_size)			
+			DisplayServer.window_set_size(display_size)
+			DisplayServer.window_set_position(    (DisplayServer.screen_get_size() / 2) - (DisplayServer.window_get_size(DisplayServer.MAIN_WINDOW_ID) / 2)     )			
 			print("Splitting Resolution")
 			GlobalInfo.ui.remove_debuff(id)
 		
