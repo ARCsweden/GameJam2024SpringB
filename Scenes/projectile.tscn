@@ -16,6 +16,7 @@ noise = SubResource("FastNoiseLite_83ycj")
 shader = ExtResource("5_loqcd")
 shader_parameter/scroll_speed = Vector2(0.02, 0.02)
 shader_parameter/strength = 0.025
+shader_parameter/scroll_speed2 = Vector2(0.05, 0.05)
 shader_parameter/noice = SubResource("NoiseTexture2D_h17ij")
 
 [sub_resource type="Curve" id="Curve_cfee3"]
