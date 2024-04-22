@@ -1,8 +1,26 @@
-[gd_scene load_steps=14 format=3 uid="uid://1gqn25rqj46k"]
+[gd_scene load_steps=19 format=3 uid="uid://1gqn25rqj46k"]
 
 [ext_resource type="Texture2D" uid="uid://dxoge4oyqlfd" path="res://Sprites/BlueSphere.png" id="1_6yldy"]
 [ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_asnnf"]
 [ext_resource type="AudioStream" uid="uid://c0d42k1okhw4b" path="res://SFX/SpHit.wav" id="3_2uit3"]
+[ext_resource type="Shader" path="res://Scenes/warp.gdshader" id="5_loqcd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_83ycj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h17ij"]
+width = 300
+height = 300
+noise = SubResource("FastNoiseLite_83ycj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hj37m"]
+shader = ExtResource("5_loqcd")
+shader_parameter/scroll_speed = Vector2(0.02, 0.02)
+shader_parameter/strength = 0.025
+shader_parameter/noice = SubResource("NoiseTexture2D_h17ij")
+
+[sub_resource type="Curve" id="Curve_cfee3"]
+_data = [Vector2(0.0124688, 0.990459), 0.0, 0.0, 0, 0, Vector2(1, 0.0254771), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1h4g4"]
 atlas = ExtResource("1_6yldy")
@@ -89,6 +107,23 @@ _data = {
 [node name="Projectile" type="Node2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_asnnf")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_hj37m")
+amount = 15
+lifetime = 1.5
+preprocess = 1.0
+explosiveness = 0.07
+randomness = 0.17
+lifetime_randomness = 0.27
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(1, 1)
+spread = 27.52
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+scale_amount_min = 0.0
+scale_amount_max = 40.0
+scale_amount_curve = SubResource("Curve_cfee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qcsd7")
